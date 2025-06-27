@@ -78,7 +78,7 @@ Workd | Software Engineer IV | Jan 2018 – March 2021
 • Led implementation of encryption and security protocols
 
 EDUCATION
-M.S. Artificial Intelligence & Machine Learning - Colorado State University Global (Expected Oct 2025)
+M.S. Artificial Intelligence & Machine Learning - Colorado State University Global (2025)
 B.S. Computer Information Systems - Metropolitan State University of Denver
 Software Engineering Immersive - General Assembly, Denver`;
 

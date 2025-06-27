@@ -236,7 +236,12 @@ export class CommandPalette {
     const command = this.filteredCommands[this.selectedIndex];
     if (command) {
       this.close();
-      command.action();
+      try {
+        command.action();
+      } catch (error) {
+        console.error('Command execution error:', error);
+        this.showToast('❌ Command failed: ' + error.message);
+      }
     }
   }
   

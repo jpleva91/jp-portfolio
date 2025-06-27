@@ -124,24 +124,6 @@
   animation: electric-border 3s linear infinite;
 }
 
-/* Cursor styles for dark theme */
-[data-theme="dark"] .magnetic-cursor {
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--accent-cyan);
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  transition: all 0.1s;
-  z-index: 9999;
-  mix-blend-mode: difference;
-}
-
-[data-theme="dark"] .magnetic-cursor.hover {
-  width: 40px;
-  height: 40px;
-  background: rgba(0, 255, 255, 0.1);
-}
 
 /* Neon effects in dark mode */
 [data-theme="dark"] h1,

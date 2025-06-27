@@ -150,17 +150,20 @@ export class PortfolioChat {
       const decoder = new TextDecoder();
       let assistantMessage = '';
       const messageEl = this.addMessage('', 'bot');
+      let buffer = '';
       
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
         
-        const chunk = decoder.decode(value);
-        const lines = chunk.split('\n');
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop() || '';
         
         for (const line of lines) {
-          if (line.startsWith('data: ')) {
-            const data = line.slice(6);
+          const trimmedLine = line.trim();
+          if (trimmedLine.startsWith('data: ')) {
+            const data = trimmedLine.slice(6);
             if (data === '[DONE]') continue;
             
             try {
@@ -171,7 +174,7 @@ export class PortfolioChat {
                 this.scrollToBottom();
               }
             } catch (e) {
-              // Skip invalid JSON
+              console.error('Parse error:', e, 'Data:', data);
             }
           }
         }

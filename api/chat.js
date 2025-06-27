@@ -1,46 +1,41 @@
-import { openai } from '@ai-sdk/openai';
-import { streamText } from 'ai';
-import rateLimit from '../lib/rate-limit.js';
+export const config = {
+  runtime: 'edge',
+};
 
-const limiter = rateLimit({
-  interval: 60 * 1000, // 1 minute
-  uniqueTokenPerInterval: 500, // Max 500 unique tokens per interval
-});
-
-export default async function handler(req, res) {
-  // Only allow POST
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+export default async function handler(request) {
+  // Handle CORS
+  if (request.method === 'OPTIONS') {
+    return new Response(null, {
+      status: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type',
+      },
+    });
   }
 
-  // CORS headers
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+  if (request.method !== 'POST') {
+    return new Response(JSON.stringify({ error: 'Method not allowed' }), {
+      status: 405,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+    });
   }
 
   try {
-    // Rate limiting by IP
-    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-    const { success, limit, remaining, reset } = await limiter.check(res, 10, ip);
-    
-    if (!success) {
-      return res.status(429).json({
-        error: 'Too many requests',
-        limit,
-        remaining,
-        reset: new Date(reset).toISOString()
-      });
-    }
-
-    const { messages } = req.body;
+    const { messages } = await request.json();
 
     if (!messages || !Array.isArray(messages)) {
-      return res.status(400).json({ error: 'Messages array required' });
+      return new Response(JSON.stringify({ error: 'Messages array required' }), {
+        status: 400,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
+      });
     }
 
     // Limit message history to prevent abuse
@@ -62,29 +57,48 @@ Key facts about Jared:
 Keep responses concise and professional. If asked about specific projects or experience, refer them to the relevant sections of the portfolio.`
     };
 
-    const result = await streamText({
-      model: openai('gpt-4o-mini'),
-      messages: [systemMessage, ...limitedMessages],
-      maxTokens: 500,
-      temperature: 0.7,
+    const openaiResponse = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: 'gpt-4o-mini',
+        messages: [systemMessage, ...limitedMessages],
+        max_tokens: 500,
+        temperature: 0.7,
+        stream: true,
+      }),
     });
 
-    // Convert the stream to a response
-    const stream = result.toAIStreamResponse();
-    return new Response(stream, {
+    if (!openaiResponse.ok) {
+      throw new Error('OpenAI API error');
+    }
+
+    // Return the streaming response with CORS headers
+    return new Response(openaiResponse.body, {
       headers: {
         'Content-Type': 'text/event-stream',
         'Cache-Control': 'no-cache',
         'Connection': 'keep-alive',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type',
       },
     });
 
   } catch (error) {
     console.error('Chat API error:', error);
     
-    // Don't expose internal errors
-    return res.status(500).json({ 
+    return new Response(JSON.stringify({ 
       error: 'An error occurred processing your request' 
+    }), {
+      status: 500,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
     });
   }
 }

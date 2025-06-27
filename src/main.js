@@ -49,38 +49,48 @@ Staff/Principal Engineer • Platform Architect
 jpleva91@gmail.com | linkedin.com/in/jared-pleva | github.com/jpleva91
 
 SUMMARY
-Senior Software Engineer with over 10 years of experience in full-stack development, platform architecture, and technical leadership across enterprise and startup environments. Deep expertise in Angular, .NET, and AI integration. Currently architecting UI monorepo and platform tooling strategies at INFICON. Targeting Staff Engineer, Principal Engineer, or Platform Architect roles where I can drive technical vision and mentor engineering teams.
+Senior Software Engineer with over 10 years of experience leading platform architecture, AI integrations, and cross-team technical initiatives across enterprise and government environments. Proven track record in building scalable monorepos, designing modern visualization systems, and prototyping cutting-edge agentic AI workflows. Passionate about transforming technical challenges into business value, mentoring engineers, and driving modernization efforts.
 
-TECHNICAL SKILLS
-Languages & Frameworks: TypeScript, JavaScript, C#, Python, Angular (v2-19), .NET Core, Node.js
-AI/ML & Data: RAG Pipelines, Claude API, LangChain, MastraAI, GPT + Elasticsearch
-Tools & Platform: Git, Docker, AWS, Azure DevOps, Nx, Cypress
-Frontend & UI: NGRX, D3.js, AG Grid, Highcharts, Tailwind CSS
+TECHNICAL HIGHLIGHTS
+• Architecture & Platforms: Nx monorepos, micro-frontend architecture, modular library design, CI/CD pipelines, Angular 2–19, .NET Core
+• AI/ML & Prototyping: Prompt engineering, LLM integrations (Claude, Mastra), agentic AI workflows, streaming AI pipelines
+• Data & Visualization: D3.js, Highcharts, AG Grid, dynamic query builders, enterprise reporting solutions
+• Cross-Functional Leadership: Team mentoring, architecture guidance, stakeholder communication, cross-team initiatives
+• Business Impact: Cost reduction via technology migrations, enterprise tool adoption, modernization of legacy systems
 
 PROFESSIONAL EXPERIENCE
 
-INFICON | Senior Software Engineer | Remote | June 2022 – Present
-• Led greenfield development of enterprise dashboard in Angular 19, Nx monorepo
-• Built reusable Angular libraries for cross-team consumption
-• Architected Prompt-to-Chart AI agent flows with streaming LLM integration
-• Drove platform engineering proposals and cost-saving prototypes
-• Delivered vendor migration strategies (Highcharts → D3.js)
-• Mentored developers and shaped technical architecture decisions
+INFICON — Senior Software Engineer | June 2022 – Present | Remote
+• Architected and led greenfield development of a modern Nx monorepo platform for semiconductor enterprise reporting tools, defining scalable library structures, CI/CD pipelines, and versioning strategy adopted company-wide
+• Designed and published reusable UI libraries, improving development velocity and consistency across multiple apps and teams
+• Spearheaded prototyping of agentic AI workflows, integrating LLMs (Claude, Mastra) into real-time charting and grid solutions, influencing executive direction and securing client interest from major semiconductor partners
+• Drove cost-saving initiatives by evaluating and implementing alternatives to Highcharts and AG Grid, reducing future licensing expenses while modernizing visualization capabilities
+• Acted as a cross-team technical leader, providing architectural guidance, tooling improvements, and mentorship to developers across multiple initiatives
+• Managed CI/CD integration and NPM package publishing for shared UI libraries, standardizing component reuse and maintaining version control discipline across teams
 
-Intellibridge | Senior Software Engineer | March 2021 – June 2022
-• Modernized USDA finance applications with Angular/.NET/SQL stack
-• Led full-stack development in SAFe Agile environment
-• Managed cloud deployments and CI/CD pipelines
+USDA — Senior Software Engineer | March 2021 – June 2022
+• Led the strategic modernization of USDA's federal land conservation contracting system, migrating a legacy Internet Explorer platform to a modern architecture compatible with Google Chrome, ensuring regulatory compliance and securing long-term maintainability
+• Served as technical lead across multiple modernization initiatives, designing full-stack solutions with .NET, Angular, and complex SQL procedures to replace aging systems
+• Led architecture and platform upgrades, including micro-frontend integrations and Nx monorepo adoption, enabling modular deployments and parallel team development
+• Assumed DevOps ownership, defining Git workflows, cherry-pick deployments, and collaborating directly with solutions architects to ensure reliable delivery in regulated environments
+• Delivered significant process improvements, reducing manual deployment errors and accelerating development velocity in highly controlled federal contexts
 
-Workd | Software Engineer IV | Jan 2018 – March 2021
-• Developed healthcare CRM and property management features
-• Migrated legacy APIs from .NET to Node.js
-• Led implementation of encryption and security protocols
+Workd — Software Engineer IV | January 2018 – March 2021
+• Led core platform development for enterprise CRM and ERP systems, designing a dynamic query builder enabling non-technical users to retrieve complex datasets, significantly enhancing product flexibility and client satisfaction
+• Co-led the full redesign of Workd's platform UX, collaborating closely with product designers to align engineering practices with modern usability standards
+• Architected inventory management solutions and an integrated email templating system, directly contributing to increased client adoption and eventual product acquisition by a major RV dealership enterprise
+• Worked across the full stack with Angular, .NET, and Node.js to deliver scalable SaaS solutions for diverse industries
+
+Mike Shaw Automotive Group — Internet Sales Director / BI Developer | November 2010 – August 2017
+• Managed a 30-person sales team while simultaneously designing and implementing custom business intelligence dashboards to track sales pipelines, financial performance, and marketing effectiveness
+• Designed and implemented a scalable analytics system adopted across multiple dealerships nationwide, standardizing operational reporting and performance analysis
+• Led digital marketing strategies, inventory management, CRM optimizations, and cross-department process improvements, demonstrating a unique blend of technical and business leadership
+• Partnered with external software vendors to architect a sales and finance analytics tool that was later deployed across multiple automotive retail locations
 
 EDUCATION
-M.S. Artificial Intelligence & Machine Learning - Colorado State University Global (2025)
-B.S. Computer Information Systems - Metropolitan State University of Denver
-Software Engineering Immersive - General Assembly, Denver`;
+• Master of Science, Artificial Intelligence & Machine Learning (2025) — CSU Global
+• Bachelor of Science, Computer Information Systems — Metropolitan State University of Denver
+• Software Engineering Immersive — General Assembly`;
 
       // Create blob and download
       const blob = new Blob([resumeText], { type: 'text/plain' });

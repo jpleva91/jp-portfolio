@@ -1,26 +1,9 @@
 // Sarah Drasner-style advanced animations
 
-// Particle System
+// Placeholder for particle system - now handled by WebGL
 function createParticleSystem() {
-  const container = document.getElementById('particle-container');
-  if (!container) return;
-
-  const particleCount = 30;
-  const particles = [];
-
-  for (let i = 0; i < particleCount; i++) {
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    particle.style.left = Math.random() * 100 + '%';
-    particle.style.width = Math.random() * 10 + 5 + 'px';
-    particle.style.height = particle.style.width;
-    particle.style.backgroundColor = `hsl(${200 + Math.random() * 20}, 70%, 50%)`;
-    particle.style.borderRadius = '50%';
-    particle.style.animationDelay = Math.random() * 15 + 's';
-    particle.style.animationDuration = (15 + Math.random() * 10) + 's';
-    container.appendChild(particle);
-    particles.push(particle);
-  }
+  // WebGL background handles this now
+  console.log('Particle system initialized via WebGL');
 }
 
 // Intersection Observer for scroll animations
@@ -98,23 +81,10 @@ function setupNavbarScroll() {
   });
 }
 
-// Mouse parallax effect
+// Mouse parallax effect - now integrated with WebGL
 function setupMouseParallax() {
-  const hero = document.querySelector('#home');
-  const particles = document.querySelectorAll('.particle');
-  
-  hero.addEventListener('mousemove', (e) => {
-    const x = e.clientX / window.innerWidth;
-    const y = e.clientY / window.innerHeight;
-    
-    particles.forEach((particle, index) => {
-      const speed = (index + 1) * 0.5;
-      const translateX = (x - 0.5) * speed * 20;
-      const translateY = (y - 0.5) * speed * 20;
-      
-      particle.style.transform = `translate(${translateX}px, ${translateY}px)`;
-    });
-  });
+  // Mouse tracking is now handled by WebGL shader
+  console.log('Mouse parallax initialized via WebGL');
 }
 
 // Typewriter effect for hero text

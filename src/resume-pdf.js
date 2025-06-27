@@ -24,12 +24,18 @@ export function generateResumePDF() {
   };
   
   const addBullet = (text) => {
+    // Check if we need a new page before adding bullet
+    if (yPosition > 260) {
+      doc.addPage();
+      yPosition = 20;
+    }
+    
     const lines = doc.splitTextToSize(text, rightMargin - leftMargin - 10);
     doc.setFontSize(10);
     doc.setTextColor(...textColor);
     doc.text('•', leftMargin + 5, yPosition);
     doc.text(lines, leftMargin + 10, yPosition);
-    yPosition += lines.length * 5;
+    yPosition += lines.length * 5 + 2;
   };
   
   const addSection = (title) => {
@@ -110,8 +116,8 @@ export function generateResumePDF() {
     addBullet(bullet);
   });
   
-  // Check if we need a new page
-  if (yPosition > 250) {
+  // Check if we need a new page before USDA section
+  if (yPosition > 200) {
     doc.addPage();
     yPosition = 20;
   }
@@ -158,6 +164,12 @@ export function generateResumePDF() {
   workdBullets.forEach(bullet => {
     addBullet(bullet);
   });
+  
+  // Check if we need a new page before Education section
+  if (yPosition > 200) {
+    doc.addPage();
+    yPosition = 20;
+  }
   
   // Education
   addSection('EDUCATION');

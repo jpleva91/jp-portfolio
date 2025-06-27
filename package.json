@@ -20,6 +20,12 @@
     "gh-pages": "^6.3.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.17",
+    "vercel": "^44.2.7",
     "vite": "^7.0.0"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^0.0.24",
+    "ai": "^3.0.23",
+    "lru-cache": "^10.1.0"
   }
 }

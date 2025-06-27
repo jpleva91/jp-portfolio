@@ -6,85 +6,102 @@
   <title>Jared Pleva - Senior Software Engineer</title>
   <meta name="description" content="Senior Software Engineer specializing in AI Platforms, Angular/Nx/.NET with a Master's in AI/ML">
   <link rel="stylesheet" href="./src/styles.css">
+  <link rel="stylesheet" href="./src/animations.css">
 </head>
 <body>
   <!-- Navigation -->
-  <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm">
+  <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm transition-all duration-300" id="navbar">
     <div class="container-custom py-4">
       <div class="flex justify-between items-center">
-        <a href="/" class="text-2xl font-bold text-gradient">JP</a>
+        <a href="#home" class="text-2xl font-bold text-gradient hover-lift">JP</a>
         <div class="flex gap-6">
-          <a href="./" class="link-hover font-medium">Home</a>
-          <a href="./projects.html" class="link-hover font-medium">Projects</a>
-          <a href="./resume.html" class="link-hover font-medium">Resume</a>
-          <a href="./contact.html" class="link-hover font-medium">Contact</a>
+          <a href="#home" class="nav-link link-hover font-medium">Home</a>
+          <a href="#projects" class="nav-link link-hover font-medium">Projects</a>
+          <a href="#resume" class="nav-link link-hover font-medium">Resume</a>
+          <a href="#contact" class="nav-link link-hover font-medium">Contact</a>
         </div>
       </div>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <section class="relative min-h-screen flex items-center pt-20">
-    <!-- Animated Background -->
+  <section id="home" class="relative min-h-screen flex items-center pt-20">
+    <!-- Advanced Animated Background -->
     <div class="absolute inset-0 overflow-hidden">
       <svg class="absolute w-full h-full" preserveAspectRatio="none" viewBox="0 0 1440 560">
         <defs>
-          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" style="stop-color:#0EA5E9;stop-opacity:0.3" />
-            <stop offset="50%" style="stop-color:#38BDF8;stop-opacity:0.2" />
-            <stop offset="100%" style="stop-color:#7DD3FC;stop-opacity:0.3" />
+          <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" class="animate-gradient-shift" style="stop-color:#0EA5E9;stop-opacity:0.3">
+              <animate attributeName="stop-color" values="#0EA5E9;#38BDF8;#7DD3FC;#0EA5E9" dur="10s" repeatCount="indefinite" />
+            </stop>
+            <stop offset="50%" class="animate-gradient-shift" style="stop-color:#38BDF8;stop-opacity:0.2">
+              <animate attributeName="stop-color" values="#38BDF8;#7DD3FC;#0EA5E9;#38BDF8" dur="10s" repeatCount="indefinite" />
+            </stop>
+            <stop offset="100%" class="animate-gradient-shift" style="stop-color:#7DD3FC;stop-opacity:0.3">
+              <animate attributeName="stop-color" values="#7DD3FC;#0EA5E9;#38BDF8;#7DD3FC" dur="10s" repeatCount="indefinite" />
+            </stop>
           </linearGradient>
         </defs>
-        <path fill="url(#gradient)" class="animate-float"
+        <path fill="url(#gradient1)" class="animate-morph"
           d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z">
+          <animate attributeName="d" 
+            values="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z;M0,128L48,138.7C96,149,192,171,288,165.3C384,160,480,128,576,133.3C672,139,768,181,864,192C960,203,1056,181,1152,160C1248,139,1344,117,1392,106.7L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z;M0,160L48,149.3C96,139,192,117,288,128C384,139,480,181,576,192C672,203,768,181,864,154.7C960,128,1056,96,1152,96C1248,96,1344,128,1392,144L1440,160L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z;M0,96L48,117.3C96,139,192,181,288,181.3C384,181,480,139,576,117.3C672,96,768,96,864,122.7C960,149,1056,203,1152,213.3C1248,224,1344,192,1392,176L1440,160L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z;M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
+            dur="25s"
+            repeatCount="indefinite" />
         </path>
       </svg>
       
-      <!-- Floating Particles -->
-      <div class="absolute inset-0">
-        <div class="absolute top-20 left-10 w-4 h-4 bg-primary-400 rounded-full animate-float opacity-50"></div>
-        <div class="absolute top-40 right-20 w-3 h-3 bg-primary-300 rounded-full animate-float opacity-60" style="animation-delay: 1s;"></div>
-        <div class="absolute bottom-20 left-1/4 w-5 h-5 bg-primary-500 rounded-full animate-float opacity-40" style="animation-delay: 2s;"></div>
-        <div class="absolute bottom-40 right-1/3 w-3 h-3 bg-primary-400 rounded-full animate-float opacity-50" style="animation-delay: 3s;"></div>
-      </div>
+      <!-- Dynamic Particle System -->
+      <div id="particle-container" class="absolute inset-0"></div>
     </div>
 
     <!-- Hero Content -->
     <div class="relative container-custom">
       <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-in">
-          Senior Software Engineer
+        <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-stagger stagger-1">
+          <span class="inline-block hover-lift">Senior</span> 
+          <span class="inline-block hover-lift">Software</span> 
+          <span class="inline-block hover-lift">Engineer</span>
         </h1>
-        <p class="text-xl md:text-2xl text-gray-600 mb-8 animate-in" style="animation-delay: 0.2s;">
+        <p class="text-xl md:text-2xl text-gray-600 mb-8 animate-stagger stagger-2">
           AI Platforms • Angular/Nx/.NET | Master's in AI/ML
         </p>
-        <p class="text-lg text-gray-700 mb-12 max-w-3xl mx-auto animate-in" style="animation-delay: 0.4s;">
+        <p class="text-lg text-gray-700 mb-12 max-w-3xl mx-auto animate-stagger stagger-3">
           I build intelligent tools that simplify complex systems. From AI-driven dashboards to creative SaaS prototypes, 
-          I'm passionate about blending engineering and design to craft experiences that scale. Outside of code, I'm 
-          chasing paddleboarding on the Great Lakes, exploring music, and building the future I want for my family.
+          I'm passionate about blending engineering and design to craft experiences that scale.
         </p>
-        <div class="flex gap-4 justify-center animate-in" style="animation-delay: 0.6s;">
-          <a href="/projects.html" class="btn-primary">View Projects</a>
-          <a href="/contact.html" class="btn-secondary">Get In Touch</a>
+        <div class="flex gap-4 justify-center animate-stagger stagger-4">
+          <a href="#projects" class="btn-primary hover-lift animate-glow">View Projects</a>
+          <a href="#contact" class="btn-secondary hover-lift">Get In Touch</a>
         </div>
       </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <svg class="w-6 h-10 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
     </div>
   </section>
 
   <!-- What I Bring Section -->
   <section class="section-padding bg-gray-100">
     <div class="container-custom">
-      <h2 class="text-4xl font-bold text-center mb-16">What I Bring</h2>
+      <h2 class="text-4xl font-bold text-center mb-16 animate-on-scroll">What I Bring</h2>
       <div class="grid md:grid-cols-3 gap-8">
-        <div class="card animate-in">
+        <div class="card card-3d hover-lift animate-on-scroll stagger-1">
+          <div class="text-6xl mb-4">🚀</div>
           <h3 class="text-2xl font-bold mb-4 text-primary-600">10+ Years Experience</h3>
           <p class="text-gray-700">Full-stack development across enterprise and startup environments</p>
         </div>
-        <div class="card animate-in" style="animation-delay: 0.2s;">
+        <div class="card card-3d hover-lift animate-on-scroll stagger-2">
+          <div class="text-6xl mb-4">🤖</div>
           <h3 class="text-2xl font-bold mb-4 text-primary-600">AI Integration</h3>
           <p class="text-gray-700">Building the next generation of AI-powered platforms</p>
         </div>
-        <div class="card animate-in" style="animation-delay: 0.4s;">
+        <div class="card card-3d hover-lift animate-on-scroll stagger-3">
+          <div class="text-6xl mb-4">📚</div>
           <h3 class="text-2xl font-bold mb-4 text-primary-600">Continuous Learning</h3>
           <p class="text-gray-700">Master's in AI/ML, always exploring new technologies</p>
         </div>
@@ -92,6 +109,318 @@
     </div>
   </section>
 
+  <!-- Projects Section -->
+  <section id="projects" class="section-padding">
+    <div class="container-custom">
+      <h2 class="text-5xl font-bold mb-6 animate-on-scroll">Featured Projects</h2>
+      <p class="text-xl text-gray-600 max-w-3xl mb-16 animate-on-scroll stagger-1">
+        A selection of projects that showcase my expertise in AI integration, platform architecture, and innovative problem-solving.
+      </p>
+
+      <div class="space-y-24">
+        <!-- Project 1 -->
+        <div class="project-card animate-on-scroll">
+          <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="order-2 md:order-1">
+              <h3 class="text-3xl font-bold mb-4">Prompt-to-Chart AI Workflow</h3>
+              <p class="text-gray-700 mb-6">
+                Agentic AI workflow for generating charts and tables from natural language prompts. 
+                A groundbreaking approach to data visualization that transforms how users interact with complex datasets.
+              </p>
+              
+              <div class="mb-6">
+                <h4 class="font-semibold mb-2 text-gray-900">Key Highlights:</h4>
+                <ul class="list-disc list-inside text-gray-700 space-y-1">
+                  <li>Greenfield development integrated with Nx monorepo architecture</li>
+                  <li>Built reusable UI libraries for enterprise applications</li>
+                  <li>Leveraged streaming LLM integrations for real-time responses</li>
+                  <li>Architected scalable component library system</li>
+                </ul>
+              </div>
+              
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm hover-lift">Angular 19</span>
+                <span class="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm hover-lift">Nx Monorepo</span>
+                <span class="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm hover-lift">Claude API</span>
+                <span class="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm hover-lift">Mastra AI</span>
+                <span class="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm hover-lift">TypeScript</span>
+                <span class="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm hover-lift">NGRX</span>
+              </div>
+            </div>
+            <div class="order-1 md:order-2">
+              <div class="bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg p-12 text-white animate-glow">
+                <svg class="w-full h-48 animate-draw" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card animate-on-scroll">
+          <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="order-2">
+              <h3 class="text-3xl font-bold mb-4">AI Children's Book SaaS MVP</h3>
+              <p class="text-gray-700 mb-6">
+                Full-stack SaaS application that generates personalized children's books using AI for both story and illustrations. 
+                Built as a personal project to explore the intersection of creativity and technology.
+              </p>
+              
+              <div class="mb-6">
+                <h4 class="font-semibold mb-2 text-gray-900">Key Highlights:</h4>
+                <ul class="list-disc list-inside text-gray-700 space-y-1">
+                  <li>Integrated Stripe for subscription payments and PDF exports</li>
+                  <li>Built as a personal SaaS experiment from concept to deployment</li>
+                  <li>Implemented AI safety measures for child-appropriate content</li>
+                  <li>Designed intuitive UI for non-technical users</li>
+                </ul>
+              </div>
+              
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm hover-lift">Next.js</span>
+                <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm hover-lift">OpenAI API</span>
+                <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm hover-lift">Stripe</span>
+                <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm hover-lift">Supabase</span>
+                <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm hover-lift">TypeScript</span>
+                <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm hover-lift">Tailwind CSS</span>
+              </div>
+            </div>
+            <div class="order-1">
+              <div class="bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg p-12 text-white animate-glow">
+                <svg class="w-full h-48 animate-draw" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card animate-on-scroll">
+          <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="order-2 md:order-1">
+              <h3 class="text-3xl font-bold mb-4">Visualization & Platform Modernization</h3>
+              <p class="text-gray-700 mb-6">
+                Led the transformation of enterprise dashboard infrastructure, migrating from legacy systems to modern, 
+                performant solutions while maintaining backward compatibility.
+              </p>
+              
+              <div class="mb-6">
+                <h4 class="font-semibold mb-2 text-gray-900">Key Highlights:</h4>
+                <ul class="list-disc list-inside text-gray-700 space-y-1">
+                  <li>Greenfield architecture for enterprise dashboard platform</li>
+                  <li>Prototyped Highcharts to D3.js migration strategy</li>
+                  <li>Explored AG Grid alternatives for better performance</li>
+                  <li>Modernized FabTime reporting infrastructure</li>
+                </ul>
+              </div>
+              
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm hover-lift">Angular</span>
+                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm hover-lift">D3.js</span>
+                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm hover-lift">Highcharts</span>
+                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm hover-lift">AG Grid</span>
+                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm hover-lift">.NET Core</span>
+                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm hover-lift">SQL Server</span>
+              </div>
+            </div>
+            <div class="order-1 md:order-2">
+              <div class="bg-gradient-to-br from-green-500 to-teal-600 rounded-lg p-12 text-white animate-glow">
+                <svg class="w-full h-48 animate-draw" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resume Section -->
+  <section id="resume" class="section-padding bg-gray-100">
+    <div class="container-custom max-w-4xl">
+      <div class="flex justify-between items-center mb-12">
+        <h2 class="text-5xl font-bold animate-on-scroll">Resume</h2>
+        <button class="btn-primary animate-on-scroll hover-lift">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          Download PDF
+        </button>
+      </div>
+
+      <!-- Summary -->
+      <div class="bg-white rounded-lg shadow-lg p-8 mb-8 animate-on-scroll hover-lift">
+        <h3 class="text-2xl font-bold mb-4">Summary</h3>
+        <p class="text-gray-700 leading-relaxed">
+          Senior Software Engineer with over 10 years of experience in full-stack development, platform architecture, 
+          and team leadership across enterprise and startup environments. Proven expertise in Angular, .NET, and AI integration. 
+          Currently leading UI monorepo and platform tooling initiatives at INFICON. Seeking roles as Software Architect, 
+          Staff Engineer, or AI Platform Lead.
+        </p>
+      </div>
+
+      <!-- Technical Skills -->
+      <div class="bg-white rounded-lg shadow-lg p-8 mb-8 animate-on-scroll hover-lift">
+        <h3 class="text-2xl font-bold mb-6">Technical Skills</h3>
+        <div class="space-y-4">
+          <div>
+            <h4 class="font-semibold text-primary-700 mb-2">Languages & Frameworks</h4>
+            <p class="text-gray-700">TypeScript, JavaScript, C#, Python, Angular (v2-19), .NET Core, Node.js</p>
+          </div>
+          <div>
+            <h4 class="font-semibold text-primary-700 mb-2">AI/ML & Data</h4>
+            <p class="text-gray-700">RAG Pipelines, Claude API, LangChain, MastraAI, GPT + Elasticsearch</p>
+          </div>
+          <div>
+            <h4 class="font-semibold text-primary-700 mb-2">Tools & Platform</h4>
+            <p class="text-gray-700">Git, Docker, AWS, Azure DevOps, Nx, Cypress</p>
+          </div>
+          <div>
+            <h4 class="font-semibold text-primary-700 mb-2">Frontend & UI</h4>
+            <p class="text-gray-700">NGRX, D3.js, AG Grid, Highcharts, Tailwind CSS</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Experience -->
+      <div class="bg-white rounded-lg shadow-lg p-8 mb-8 animate-on-scroll hover-lift">
+        <h3 class="text-2xl font-bold mb-6">Professional Experience</h3>
+        
+        <!-- INFICON -->
+        <div class="mb-8">
+          <div class="flex justify-between items-start mb-2">
+            <div>
+              <h4 class="text-xl font-bold">INFICON</h4>
+              <p class="text-primary-600 font-medium">Senior Software Engineer | Remote</p>
+            </div>
+            <span class="text-gray-600">June 2022 – Present</span>
+          </div>
+          <ul class="list-disc list-inside text-gray-700 space-y-2 mt-4">
+            <li>Led greenfield development of enterprise dashboard in Angular 19, Nx monorepo</li>
+            <li>Built reusable Angular libraries for cross-team consumption</li>
+            <li>Architected Prompt-to-Chart AI agent flows with streaming LLM integration</li>
+            <li>Drove platform engineering proposals and cost-saving prototypes</li>
+            <li>Delivered vendor migration strategies (Highcharts → D3.js)</li>
+            <li>Mentored developers and shaped technical architecture decisions</li>
+          </ul>
+        </div>
+
+        <!-- More experience entries... -->
+      </div>
+
+      <!-- Education -->
+      <div class="bg-white rounded-lg shadow-lg p-8 animate-on-scroll hover-lift">
+        <h3 class="text-2xl font-bold mb-6">Education</h3>
+        <div class="space-y-4">
+          <div>
+            <h4 class="text-lg font-bold">M.S. Artificial Intelligence & Machine Learning</h4>
+            <p class="text-gray-700">Colorado State University Global • Expected Oct 2025</p>
+          </div>
+          <div>
+            <h4 class="text-lg font-bold">B.S. Computer Information Systems</h4>
+            <p class="text-gray-700">Metropolitan State University of Denver</p>
+          </div>
+          <div>
+            <h4 class="text-lg font-bold">Software Engineering Immersive</h4>
+            <p class="text-gray-700">General Assembly, Denver</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section-padding">
+    <div class="container-custom">
+      <h2 class="text-5xl font-bold mb-6 animate-on-scroll">Let's Connect</h2>
+      <p class="text-xl text-gray-600 max-w-3xl mb-12 animate-on-scroll stagger-1">
+        I'm always interested in discussing new opportunities, innovative projects, or just connecting with fellow developers.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-12">
+        <!-- Contact Form -->
+        <div class="bg-white rounded-lg shadow-lg p-8 animate-on-scroll hover-lift">
+          <form id="contact-form" class="space-y-6">
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+              <input type="text" id="name" name="name" required
+                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all">
+            </div>
+            
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+              <input type="email" id="email" name="email" required
+                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all">
+            </div>
+            
+            <div>
+              <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+              <textarea id="message" name="message" rows="6" required
+                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"></textarea>
+            </div>
+            
+            <button type="submit" class="btn-primary w-full hover-lift">
+              Send Message
+            </button>
+          </form>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="space-y-8">
+          <!-- Get in Touch -->
+          <div class="bg-white rounded-lg shadow-lg p-8 animate-on-scroll hover-lift">
+            <h3 class="text-2xl font-bold mb-4">Get in Touch</h3>
+            <p class="text-gray-700 mb-6">
+              Feel free to reach out through the form or connect with me on social media. 
+              I typically respond within 24-48 hours.
+            </p>
+            
+            <div class="space-y-4">
+              <a href="mailto:jared@example.com" class="flex items-center gap-3 text-gray-700 hover:text-primary-600 transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+                jared@example.com
+              </a>
+              
+              <a href="https://linkedin.com/in/jaredpleva" target="_blank" class="flex items-center gap-3 text-gray-700 hover:text-primary-600 transition-colors">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+                linkedin.com/in/jaredpleva
+              </a>
+              
+              <a href="https://github.com/jpleva91" target="_blank" class="flex items-center gap-3 text-gray-700 hover:text-primary-600 transition-colors">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                github.com/jpleva91
+              </a>
+            </div>
+          </div>
+
+          <!-- Schedule a Call -->
+          <div class="bg-primary-50 rounded-lg p-8 animate-on-scroll hover-lift">
+            <h3 class="text-2xl font-bold mb-4">Schedule a Call</h3>
+            <p class="text-gray-700 mb-6">
+              Prefer to chat? Book a 30-minute call at your convenience.
+            </p>
+            <a href="#" class="btn-primary inline-flex hover-lift">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+              Open Calendar
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <script type="module" src="./src/main.js"></script>
+  <script type="module" src="./src/animations.js"></script>
 </body>
 </html>

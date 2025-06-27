@@ -1,48 +1,46 @@
 /* Magnetic cursor styles */
 .magnetic-cursor {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 40px;
   height: 40px;
   border: 2px solid rgba(14, 165, 233, 0.8);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9999;
-  transition: width 0.3s, height 0.3s, border-color 0.3s, background 0.3s;
-  transform-origin: center;
-  margin-left: -20px;
-  margin-top: -20px;
-  background: rgba(14, 165, 233, 0.05);
-  backdrop-filter: invert(0.1);
+  z-index: 99999;
+  transition: width 0.3s, height 0.3s, border-color 0.3s, background 0.3s, opacity 0.3s;
+  background: rgba(14, 165, 233, 0.1);
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.3);
 }
 
 .magnetic-cursor-inner {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 8px;
   height: 8px;
-  background: rgba(14, 165, 233, 0.8);
+  background: rgba(14, 165, 233, 1);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 10000;
-  margin-left: -4px;
-  margin-top: -4px;
-  transition: width 0.2s, height 0.2s;
+  z-index: 100000;
+  transition: width 0.2s, height 0.2s, opacity 0.3s;
+  box-shadow: 0 0 10px rgba(14, 165, 233, 0.5);
 }
 
 .magnetic-cursor.hover {
   width: 60px;
   height: 60px;
-  margin-left: -30px;
-  margin-top: -30px;
-  border-color: rgba(14, 165, 233, 0.8);
-  background: rgba(14, 165, 233, 0.1);
+  border-color: rgba(14, 165, 233, 1);
+  background: rgba(14, 165, 233, 0.2);
+  box-shadow: 0 0 40px rgba(14, 165, 233, 0.5);
 }
 
 .magnetic-cursor-inner.hover {
   width: 4px;
   height: 4px;
-  margin-left: -2px;
-  margin-top: -2px;
   background: rgba(14, 165, 233, 1);
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.8);
 }
 
 /* Dark theme cursor */

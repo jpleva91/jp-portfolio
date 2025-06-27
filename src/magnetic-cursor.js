@@ -3,13 +3,14 @@ export class MagneticCursor {
   constructor() {
     this.cursor = null;
     this.cursorInner = null;
-    this.mouseX = 0;
-    this.mouseY = 0;
-    this.cursorX = 0;
-    this.cursorY = 0;
-    this.cursorInnerX = 0;
-    this.cursorInnerY = 0;
+    this.mouseX = window.innerWidth / 2;
+    this.mouseY = window.innerHeight / 2;
+    this.cursorX = window.innerWidth / 2;
+    this.cursorY = window.innerHeight / 2;
+    this.cursorInnerX = window.innerWidth / 2;
+    this.cursorInnerY = window.innerHeight / 2;
     this.magneticElements = [];
+    this.isVisible = false;
     
     this.init();
   }
@@ -24,6 +25,10 @@ export class MagneticCursor {
     this.cursorInner.className = 'magnetic-cursor-inner';
     document.body.appendChild(this.cursorInner);
     
+    // Hide cursors initially
+    this.cursor.style.opacity = '0';
+    this.cursorInner.style.opacity = '0';
+    
     // Hide default cursor
     document.body.classList.add('magnetic-cursor-active');
     
@@ -32,12 +37,30 @@ export class MagneticCursor {
       this.mouseX = e.clientX;
       this.mouseY = e.clientY;
       
-      // Initialize cursor position on first move
-      if (!this.cursorX && !this.cursorY) {
+      // Show cursor on first movement
+      if (!this.isVisible) {
+        this.isVisible = true;
+        this.cursor.style.opacity = '1';
+        this.cursorInner.style.opacity = '1';
+        // Initialize position immediately
         this.cursorX = e.clientX;
         this.cursorY = e.clientY;
         this.cursorInnerX = e.clientX;
         this.cursorInnerY = e.clientY;
+      }
+    });
+    
+    // Hide cursor when mouse leaves window
+    document.addEventListener('mouseleave', () => {
+      this.cursor.style.opacity = '0';
+      this.cursorInner.style.opacity = '0';
+    });
+    
+    // Show cursor when mouse enters window
+    document.addEventListener('mouseenter', () => {
+      if (this.isVisible) {
+        this.cursor.style.opacity = '1';
+        this.cursorInner.style.opacity = '1';
       }
     });
     
@@ -65,9 +88,9 @@ export class MagneticCursor {
     this.cursorInnerX += (this.mouseX - this.cursorInnerX) * innerSpeed;
     this.cursorInnerY += (this.mouseY - this.cursorInnerY) * innerSpeed;
     
-    // Apply transforms
-    this.cursor.style.transform = `translate3d(${this.cursorX}px, ${this.cursorY}px, 0)`;
-    this.cursorInner.style.transform = `translate3d(${this.cursorInnerX}px, ${this.cursorInnerY}px, 0)`;
+    // Apply transforms with translate for better performance
+    this.cursor.style.transform = `translate(${this.cursorX - 20}px, ${this.cursorY - 20}px)`;
+    this.cursorInner.style.transform = `translate(${this.cursorInnerX - 4}px, ${this.cursorInnerY - 4}px)`;
     
     requestAnimationFrame(() => this.animate());
   }

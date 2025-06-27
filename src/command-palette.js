@@ -71,20 +71,22 @@ export class CommandPalette {
         e.preventDefault();
         this.toggle();
       }
-      
-      if (this.isOpen) {
-        if (e.key === 'Escape') {
-          this.close();
-        } else if (e.key === 'ArrowDown') {
-          e.preventDefault();
-          this.selectNext();
-        } else if (e.key === 'ArrowUp') {
-          e.preventDefault();
-          this.selectPrevious();
-        } else if (e.key === 'Enter') {
-          e.preventDefault();
-          this.executeSelected();
-        }
+    });
+    
+    // Separate handler for when palette is open
+    this.input.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        this.close();
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        this.selectNext();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        this.selectPrevious();
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        this.executeSelected();
       }
     });
     
@@ -110,7 +112,6 @@ export class CommandPalette {
   open() {
     this.isOpen = true;
     this.overlay.classList.add('active');
-    this.input.focus();
     this.searchQuery = '';
     this.input.value = '';
     this.selectedIndex = 0;
@@ -119,6 +120,11 @@ export class CommandPalette {
     
     // Prevent body scroll
     document.body.style.overflow = 'hidden';
+    
+    // Focus input after a small delay to ensure DOM is ready
+    setTimeout(() => {
+      this.input.focus();
+    }, 50);
   }
   
   close() {
@@ -183,10 +189,14 @@ export class CommandPalette {
     this.results.innerHTML = html;
     
     // Add click handlers
-    this.results.querySelectorAll('.command-palette-item').forEach(item => {
-      item.addEventListener('click', () => {
-        this.selectedIndex = parseInt(item.dataset.index);
-        this.executeSelected();
+    this.results.querySelectorAll('.command-palette-item').forEach((item, idx) => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const index = parseInt(item.dataset.index);
+        this.selectedIndex = index;
+        // Use setTimeout to ensure the selection is registered
+        setTimeout(() => this.executeSelected(), 0);
       });
       
       item.addEventListener('mouseenter', () => {
@@ -206,11 +216,20 @@ export class CommandPalette {
   selectNext() {
     this.selectedIndex = (this.selectedIndex + 1) % this.filteredCommands.length;
     this.renderResults();
+    this.scrollToSelected();
   }
   
   selectPrevious() {
     this.selectedIndex = (this.selectedIndex - 1 + this.filteredCommands.length) % this.filteredCommands.length;
     this.renderResults();
+    this.scrollToSelected();
+  }
+  
+  scrollToSelected() {
+    const selectedElement = this.results.querySelector('.command-palette-item.selected');
+    if (selectedElement) {
+      selectedElement.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
   }
   
   executeSelected() {

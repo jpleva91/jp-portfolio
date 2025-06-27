@@ -149,6 +149,18 @@
   text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
 }
 
+[data-theme="dark"] .bg-gray-100 {
+  background: #333 !important;
+}
+
+[data-theme="dark"] .bg-gray-100:hover {
+  background: #444 !important;
+}
+
+[data-theme="dark"] .text-gray-600 {
+  color: #aaa !important;
+}
+
 [data-theme="dark"] .animate-glow {
   animation: neon-pulse 2s ease-in-out infinite alternate;
 }

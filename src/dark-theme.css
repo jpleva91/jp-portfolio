@@ -1,0 +1,163 @@
+/* Dark theme styles */
+[data-theme="dark"] {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #141618;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --accent-cyan: #00ffff;
+  --accent-magenta: #ff00ff;
+  --accent-electric: #7f7ff8;
+}
+
+[data-theme="dark"] body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .bg-white {
+  background: var(--bg-secondary) !important;
+}
+
+[data-theme="dark"] .bg-gray-50 {
+  background: var(--bg-primary) !important;
+}
+
+[data-theme="dark"] .bg-gray-100 {
+  background: #1a1a1a !important;
+}
+
+[data-theme="dark"] .text-gray-900 {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .text-gray-700 {
+  color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .text-gray-600 {
+  color: #888 !important;
+}
+
+[data-theme="dark"] .shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 255, 255, 0.1), 0 4px 6px -4px rgba(0, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .border-gray-300 {
+  border-color: #333 !important;
+}
+
+[data-theme="dark"] nav {
+  background: rgba(10, 10, 10, 0.9) !important;
+  border-bottom: 1px solid #333;
+}
+
+[data-theme="dark"] .btn-primary {
+  background: var(--accent-electric);
+  color: white;
+  border: 2px solid var(--accent-electric);
+}
+
+[data-theme="dark"] .btn-primary:hover {
+  background: transparent;
+  color: var(--accent-electric);
+  box-shadow: 0 0 20px var(--accent-electric);
+}
+
+[data-theme="dark"] .btn-secondary {
+  background: transparent;
+  color: var(--accent-cyan);
+  border: 2px solid var(--accent-cyan);
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+  background: var(--accent-cyan);
+  color: var(--bg-primary);
+  box-shadow: 0 0 20px var(--accent-cyan);
+}
+
+[data-theme="dark"] .text-gradient {
+  background: linear-gradient(45deg, var(--accent-cyan), var(--accent-magenta));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="dark"] .glitch-hover:hover {
+  animation: glitch-small 0.3s;
+  text-shadow: 
+    2px 2px 0 var(--accent-cyan),
+    -2px -2px 0 var(--accent-magenta);
+}
+
+[data-theme="dark"] .card {
+  background: var(--bg-secondary);
+  border: 1px solid #333;
+}
+
+[data-theme="dark"] .card:hover {
+  border-color: var(--accent-electric);
+  box-shadow: 0 0 30px rgba(127, 127, 248, 0.3);
+}
+
+[data-theme="dark"] .project-card {
+  background: var(--bg-secondary);
+  border: 1px solid #333;
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .project-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--accent-cyan), var(--accent-magenta), var(--accent-electric));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+[data-theme="dark"] .project-card:hover::before {
+  opacity: 1;
+  animation: electric-border 3s linear infinite;
+}
+
+/* Cursor styles for dark theme */
+[data-theme="dark"] .magnetic-cursor {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--accent-cyan);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  transition: all 0.1s;
+  z-index: 9999;
+  mix-blend-mode: difference;
+}
+
+[data-theme="dark"] .magnetic-cursor.hover {
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 255, 255, 0.1);
+}
+
+/* Neon effects in dark mode */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2 {
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+[data-theme="dark"] .animate-glow {
+  animation: neon-pulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes neon-pulse {
+  from {
+    filter: drop-shadow(0 0 10px var(--accent-cyan));
+  }
+  to {
+    filter: drop-shadow(0 0 20px var(--accent-cyan)) drop-shadow(0 0 40px var(--accent-electric));
+  }
+}

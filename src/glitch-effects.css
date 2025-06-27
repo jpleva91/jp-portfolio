@@ -1,0 +1,330 @@
+/* Glitch Effects - Sarah Drasner Style */
+
+/* Glitch text effect */
+.glitch {
+  position: relative;
+  color: white;
+  font-size: 4rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  animation: glitch-1 0.3s infinite;
+  color: #00ffff;
+  z-index: -1;
+}
+
+.glitch::after {
+  animation: glitch-2 0.3s infinite;
+  color: #ff00ff;
+  z-index: -2;
+}
+
+@keyframes glitch-1 {
+  0% {
+    clip-path: inset(40% 0 61% 0);
+    transform: translate(-2px, -2px);
+  }
+  20% {
+    clip-path: inset(92% 0 1% 0);
+    transform: translate(2px, 2px);
+  }
+  40% {
+    clip-path: inset(43% 0 1% 0);
+    transform: translate(-2px, 2px);
+  }
+  60% {
+    clip-path: inset(25% 0 58% 0);
+    transform: translate(2px, -2px);
+  }
+  80% {
+    clip-path: inset(54% 0 7% 0);
+    transform: translate(-2px, 2px);
+  }
+  100% {
+    clip-path: inset(58% 0 43% 0);
+    transform: translate(2px, -2px);
+  }
+}
+
+@keyframes glitch-2 {
+  0% {
+    clip-path: inset(65% 0 8% 0);
+    transform: translate(2px, 2px);
+  }
+  20% {
+    clip-path: inset(4% 0 88% 0);
+    transform: translate(-2px, -2px);
+  }
+  40% {
+    clip-path: inset(82% 0 12% 0);
+    transform: translate(2px, -2px);
+  }
+  60% {
+    clip-path: inset(15% 0 81% 0);
+    transform: translate(-2px, 2px);
+  }
+  80% {
+    clip-path: inset(51% 0 25% 0);
+    transform: translate(2px, 2px);
+  }
+  100% {
+    clip-path: inset(21% 0 75% 0);
+    transform: translate(-2px, -2px);
+  }
+}
+
+/* Hover glitch effect */
+.glitch-hover {
+  transition: all 0.3s ease;
+}
+
+.glitch-hover:hover {
+  animation: glitch-small 0.3s;
+}
+
+@keyframes glitch-small {
+  0%, 100% {
+    transform: translate(0);
+    filter: hue-rotate(0deg);
+  }
+  25% {
+    transform: translate(-2px, 2px);
+    filter: hue-rotate(90deg);
+  }
+  50% {
+    transform: translate(2px, -2px);
+    filter: hue-rotate(180deg);
+  }
+  75% {
+    transform: translate(-2px, -2px);
+    filter: hue-rotate(270deg);
+  }
+}
+
+/* Scanline effect */
+.scanlines::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    transparent 50%,
+    rgba(0, 255, 255, 0.03) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.scanlines::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 0, 255, 0.01),
+    rgba(0, 255, 255, 0.01)
+  );
+  animation: scanline 8s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* Neon glow effect */
+.neon-text {
+  color: #fff;
+  text-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 21px #fff,
+    0 0 42px #0fa,
+    0 0 82px #0fa,
+    0 0 92px #0fa,
+    0 0 102px #0fa,
+    0 0 151px #0fa;
+  animation: neon-flicker 2s infinite alternate;
+}
+
+@keyframes neon-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+  }
+  20%, 24%, 55% {
+    opacity: 0.5;
+  }
+}
+
+/* Distortion effect */
+.distort {
+  animation: distort 3s infinite;
+}
+
+@keyframes distort {
+  0%, 100% {
+    filter: blur(0) contrast(100%) brightness(100%);
+  }
+  25% {
+    filter: blur(1px) contrast(110%) brightness(110%);
+  }
+  50% {
+    filter: blur(0) contrast(105%) brightness(105%);
+  }
+  75% {
+    filter: blur(0.5px) contrast(95%) brightness(95%);
+  }
+}
+
+/* RGB shift effect */
+.rgb-shift {
+  position: relative;
+}
+
+.rgb-shift::before,
+.rgb-shift::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: none;
+}
+
+.rgb-shift::before {
+  animation: rgb-shift-1 2s infinite;
+  color: cyan;
+  mix-blend-mode: screen;
+}
+
+.rgb-shift::after {
+  animation: rgb-shift-2 2s infinite;
+  color: magenta;
+  mix-blend-mode: screen;
+}
+
+@keyframes rgb-shift-1 {
+  0%, 100% {
+    transform: translate(0);
+  }
+  50% {
+    transform: translate(-2px, 1px);
+  }
+}
+
+@keyframes rgb-shift-2 {
+  0%, 100% {
+    transform: translate(0);
+  }
+  50% {
+    transform: translate(2px, -1px);
+  }
+}
+
+/* Matrix rain effect */
+.matrix-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.1;
+}
+
+/* Cyberpunk grid */
+.cyber-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: grid-move 10s linear infinite;
+}
+
+@keyframes grid-move {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(50px, 50px);
+  }
+}
+
+/* Terminal cursor effect */
+.terminal-cursor::after {
+  content: '_';
+  display: inline-block;
+  animation: cursor-blink 1s infinite;
+  color: #0fa;
+}
+
+@keyframes cursor-blink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+/* Electric border */
+.electric-border {
+  position: relative;
+  background: #000;
+  overflow: hidden;
+}
+
+.electric-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg, #00ffff, #ff00ff, #00ffff);
+  animation: electric-border 3s linear infinite;
+  z-index: -1;
+}
+
+.electric-border::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: #000;
+  z-index: -1;
+}
+
+@keyframes electric-border {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -7,6 +7,10 @@
   <meta name="description" content="Senior Software Engineer specializing in AI Platforms, Angular/Nx/.NET with a Master's in AI/ML">
   <link rel="stylesheet" href="./src/styles.css">
   <link rel="stylesheet" href="./src/animations.css">
+  <link rel="stylesheet" href="./src/glitch-effects.css">
+  <link rel="stylesheet" href="./src/dark-theme.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body>
   <!-- Navigation -->
@@ -14,11 +18,16 @@
     <div class="container-custom py-4">
       <div class="flex justify-between items-center">
         <a href="#home" class="text-2xl font-bold text-gradient hover-lift">JP</a>
-        <div class="flex gap-6">
+        <div class="flex gap-6 items-center">
           <a href="#home" class="nav-link link-hover font-medium">Home</a>
           <a href="#projects" class="nav-link link-hover font-medium">Projects</a>
           <a href="#resume" class="nav-link link-hover font-medium">Resume</a>
           <a href="#contact" class="nav-link link-hover font-medium">Contact</a>
+          <button id="theme-toggle" class="ml-4 p-2 rounded-lg hover:bg-gray-200 transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </svg>
+          </button>
         </div>
       </div>
     </div>
@@ -59,8 +68,8 @@
     <div class="relative container-custom">
       <div class="max-w-4xl mx-auto text-center">
         <h1 class="text-6xl md:text-8xl font-bold mb-4 animate-stagger stagger-1">
-          <span class="inline-block hover-lift text-gradient">Jared</span> 
-          <span class="inline-block hover-lift text-gradient">Pleva</span>
+          <span class="inline-block hover-lift text-gradient glitch-hover" data-text="Jared">Jared</span> 
+          <span class="inline-block hover-lift text-gradient glitch-hover" data-text="Pleva">Pleva</span>
         </h1>
         <h2 class="text-3xl md:text-4xl font-semibold mb-6 animate-stagger stagger-2 text-gray-700">
           Staff/Principal Engineer • Platform Architect

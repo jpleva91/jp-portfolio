@@ -43,7 +43,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // Download resume handler
   const downloadBtn = document.getElementById('download-resume');
   if (downloadBtn) {
-    downloadBtn.addEventListener('click', () => {
+    downloadBtn.addEventListener('click', async () => {
+      // Import the PDF generator
+      const { generateResumePDF } = await import('./resume-pdf.js');
+      generateResumePDF();
+    });
+  }
+  
+  // Fallback text download (keeping for reference)
+  const downloadTextBtn = document.getElementById('download-resume-text');
+  if (downloadTextBtn) {
+    downloadTextBtn.addEventListener('click', () => {
       const resumeText = `JARED PLEVA
 Staff/Principal Engineer • Platform Architect
 jpleva91@gmail.com | linkedin.com/in/jared-pleva | github.com/jpleva91

@@ -1,0 +1,87 @@
+/* 3D Tilt Card Styles */
+.project-card,
+.card {
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Glow effect that follows mouse */
+.tilt-glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(14, 165, 233, 0.15) 0%,
+    rgba(14, 165, 233, 0.05) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.15s;
+  z-index: 1;
+}
+
+/* Dark theme glow */
+[data-theme="dark"] .tilt-glow {
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 255, 255, 0.2) 0%,
+    rgba(127, 127, 248, 0.1) 40%,
+    transparent 70%
+  );
+}
+
+/* Add depth to child elements */
+.project-card > *,
+.card > * {
+  transform: translateZ(20px);
+}
+
+.project-card h3,
+.card h3 {
+  transform: translateZ(40px);
+}
+
+/* Shadow that responds to tilt */
+.project-card::after,
+.card::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 5%;
+  right: 5%;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  filter: blur(20px);
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: -1;
+}
+
+.project-card:hover::after,
+.card:hover::after {
+  opacity: 1;
+}
+
+/* Enhance existing hover-lift elements */
+.hover-lift {
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+/* Disable on touch devices */
+@media (hover: none) {
+  .tilt-glow {
+    display: none;
+  }
+  
+  .project-card,
+  .card,
+  .hover-lift {
+    transform: none !important;
+  }
+}

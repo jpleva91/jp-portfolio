@@ -1,0 +1,130 @@
+/* Skills Chart Styles */
+.skills-chart-section {
+  position: relative;
+  overflow: visible;
+}
+
+.skills-chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+  position: relative;
+}
+
+/* Chart text styles */
+.skills-chart-container text {
+  fill: #4b5563;
+  font-weight: 500;
+}
+
+[data-theme="dark"] .skills-chart-container text {
+  fill: #d1d5db;
+}
+
+/* Radar area styles */
+.radarArea {
+  transition: all 0.3s ease;
+}
+
+.radarArea:hover {
+  fill-opacity: 0.35 !important;
+}
+
+[data-theme="dark"] .radarArea {
+  fill: #00ffff !important;
+  stroke: #00ffff !important;
+}
+
+[data-theme="dark"] .radarCircle {
+  fill: #00ffff !important;
+}
+
+/* Grid styles */
+[data-theme="dark"] .axisWrapper circle,
+[data-theme="dark"] .axisWrapper line {
+  stroke: #4b5563 !important;
+}
+
+/* Tooltip styles */
+.skills-tooltip {
+  position: absolute;
+  text-align: center;
+  padding: 8px 12px;
+  font-size: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 1000;
+  white-space: nowrap;
+}
+
+.skills-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
+}
+
+/* Animation for radar area */
+@keyframes radarPulse {
+  0% {
+    stroke-width: 2px;
+    stroke-opacity: 1;
+  }
+  50% {
+    stroke-width: 4px;
+    stroke-opacity: 0.5;
+  }
+  100% {
+    stroke-width: 2px;
+    stroke-opacity: 1;
+  }
+}
+
+.radarArea {
+  animation: radarPulse 3s ease-in-out infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .skills-chart-container {
+    min-height: 400px;
+  }
+  
+  .skills-chart-container text {
+    font-size: 12px;
+  }
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .skills-chart-section {
+  background: #1a1a1a !important;
+  border: 1px solid #333;
+}
+
+[data-theme="dark"] .skills-tooltip {
+  background: rgba(127, 127, 248, 0.9);
+}
+
+[data-theme="dark"] .skills-tooltip::after {
+  border-color: rgba(127, 127, 248, 0.9) transparent transparent transparent;
+}
+
+/* Loading state */
+.skills-chart-container.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skills-chart-container.loading::after {
+  content: 'Loading skills visualization...';
+  color: #6b7280;
+  font-style: italic;
+}

@@ -1,0 +1,104 @@
+/* Custom Scrollbar Progress Indicator */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.scroll-progress-bar.visible {
+  opacity: 1;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #0ea5e9, #38bdf8);
+  transition: width 0.1s ease-out;
+  position: relative;
+}
+
+.progress-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #0ea5e9, #38bdf8);
+  filter: blur(4px);
+  opacity: 0.5;
+  transition: width 0.1s ease-out;
+}
+
+/* Complete state */
+.scroll-progress-bar.complete .progress-fill {
+  background: linear-gradient(90deg, #10b981, #34d399);
+}
+
+.scroll-progress-bar.complete .progress-glow {
+  background: linear-gradient(90deg, #10b981, #34d399);
+}
+
+/* Dark theme */
+[data-theme="dark"] .scroll-progress-bar {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .progress-fill {
+  background: linear-gradient(90deg, #00ffff, #7f7ff8);
+}
+
+[data-theme="dark"] .progress-glow {
+  background: linear-gradient(90deg, #00ffff, #7f7ff8);
+}
+
+[data-theme="dark"] .scroll-progress-bar.complete .progress-fill,
+[data-theme="dark"] .scroll-progress-bar.complete .progress-glow {
+  background: linear-gradient(90deg, #10b981, #00ffff);
+}
+
+/* Progress percentage indicator */
+.scroll-progress-bar::after {
+  content: attr(data-progress) '%';
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 12px;
+  color: #6b7280;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.scroll-progress-bar:hover::after {
+  opacity: 1;
+}
+
+/* Pulse animation when complete */
+@keyframes completePulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.scroll-progress-bar.complete {
+  animation: completePulse 2s ease-in-out infinite;
+}
+
+/* Hide on mobile */
+@media (max-width: 640px) {
+  .scroll-progress-bar {
+    height: 2px;
+  }
+  
+  .scroll-progress-bar::after {
+    display: none;
+  }
+}

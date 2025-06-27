@@ -44,8 +44,7 @@ export class AIChat {
       'tech distribution': () => this.createTechPieChart(),
       'experience years': () => this.createExperienceChart(),
       'project impact': () => this.createProjectImpactChart(),
-      'growth trajectory': () => this.createGrowthChart(),
-      'language proficiency': () => this.createLanguageChart()
+      'growth trajectory': () => this.createGrowthChart()
     };
     
     this.init();
@@ -178,7 +177,7 @@ export class AIChat {
     this.showTypingIndicator();
     setTimeout(() => {
       this.hideTypingIndicator();
-      this.addMessage("I can tell you about Jared's experience, skills, projects, or education. Try asking 'show me a skills chart' for visualizations!", 'bot');
+      this.addMessage("I can tell you about Jared's experience, skills, projects, or education. Try asking 'show me a skills chart' or 'career timeline' for visualizations!", 'bot');
     }, 1000);
   }
   
@@ -671,100 +670,6 @@ export class AIChat {
       .text('Professional Growth');
   }
   
-  createLanguageChart() {
-    this.clearChart();
-    this.chartContainer.style.display = 'block';
-    
-    const data = [
-      { language: 'TypeScript', proficiency: 95, projects: 50 },
-      { language: 'C#/.NET', proficiency: 85, projects: 30 },
-      { language: 'Python', proficiency: 70, projects: 15 },
-      { language: 'SQL', proficiency: 80, projects: 40 },
-      { language: 'JavaScript', proficiency: 90, projects: 45 }
-    ];
-    
-    const margin = { top: 20, right: 60, bottom: 40, left: 60 };
-    const width = 350 - margin.left - margin.right;
-    const height = 250 - margin.top - margin.bottom;
-    
-    const svg = d3.select(this.chartContainer)
-      .append('svg')
-      .attr('width', width + margin.left + margin.right)
-      .attr('height', height + margin.top + margin.bottom)
-      .append('g')
-      .attr('transform', `translate(${margin.left},${margin.top})`);
-    
-    const x = d3.scaleLinear()
-      .domain([0, 100])
-      .range([0, width]);
-    
-    const y = d3.scaleLinear()
-      .domain([0, 60])
-      .range([height, 0]);
-    
-    const size = d3.scaleLinear()
-      .domain([0, 100])
-      .range([5, 20]);
-    
-    const color = d3.scaleOrdinal()
-      .domain(data.map(d => d.language))
-      .range(['#0EA5E9', '#38BDF8', '#7DD3FC', '#0284C7', '#0369A1']);
-    
-    // Bubbles
-    const bubbles = svg.selectAll('.bubble')
-      .data(data)
-      .enter().append('g')
-      .attr('class', 'bubble')
-      .attr('transform', d => `translate(${x(d.proficiency)},${y(d.projects)})`);
-    
-    bubbles.append('circle')
-      .attr('r', 0)
-      .style('fill', d => color(d.language))
-      .style('opacity', 0.7)
-      .transition()
-      .duration(1000)
-      .delay((d, i) => i * 200)
-      .attr('r', d => size(d.proficiency));
-    
-    // Labels
-    bubbles.append('text')
-      .attr('text-anchor', 'middle')
-      .attr('dy', '.35em')
-      .style('font-size', '11px')
-      .style('fill', 'white')
-      .style('font-weight', 'bold')
-      .text(d => d.language)
-      .style('opacity', 0)
-      .transition()
-      .delay((d, i) => i * 200 + 1000)
-      .style('opacity', 1);
-    
-    // Axes
-    svg.append('g')
-      .attr('transform', `translate(0,${height})`)
-      .call(d3.axisBottom(x))
-      .style('font-size', '11px')
-      .append('text')
-      .attr('x', width / 2)
-      .attr('y', 35)
-      .style('text-anchor', 'middle')
-      .style('fill', 'black')
-      .style('font-size', '12px')
-      .text('Proficiency %');
-    
-    svg.append('g')
-      .call(d3.axisLeft(y))
-      .style('font-size', '11px')
-      .append('text')
-      .attr('transform', 'rotate(-90)')
-      .attr('x', -height / 2)
-      .attr('y', -40)
-      .style('text-anchor', 'middle')
-      .style('fill', 'black')
-      .style('font-size', '12px')
-      .text('Projects');
-  }
-  
   clearChart() {
     this.chartContainer.innerHTML = '';
   }
@@ -772,18 +677,23 @@ export class AIChat {
 
 // Load D3.js and initialize
 if (typeof window !== 'undefined') {
-  if (!window.d3) {
-    const script = document.createElement('script');
-    script.src = 'https://d3js.org/d3.v7.min.js';
-    script.onload = () => {
-      document.addEventListener('DOMContentLoaded', () => {
+  const initChat = () => {
+    if (!window.d3) {
+      const script = document.createElement('script');
+      script.src = 'https://d3js.org/d3.v7.min.js';
+      script.onload = () => {
         new AIChat();
-      });
-    };
-    document.head.appendChild(script);
-  } else {
-    document.addEventListener('DOMContentLoaded', () => {
+      };
+      document.head.appendChild(script);
+    } else {
       new AIChat();
-    });
+    }
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initChat);
+  } else {
+    // DOM is already loaded
+    initChat();
   }
 }

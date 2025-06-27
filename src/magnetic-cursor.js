@@ -25,12 +25,20 @@ export class MagneticCursor {
     document.body.appendChild(this.cursorInner);
     
     // Hide default cursor
-    document.body.style.cursor = 'none';
+    document.body.classList.add('magnetic-cursor-active');
     
     // Track mouse movement
     document.addEventListener('mousemove', (e) => {
       this.mouseX = e.clientX;
       this.mouseY = e.clientY;
+      
+      // Initialize cursor position on first move
+      if (!this.cursorX && !this.cursorY) {
+        this.cursorX = e.clientX;
+        this.cursorY = e.clientY;
+        this.cursorInnerX = e.clientX;
+        this.cursorInnerY = e.clientY;
+      }
     });
     
     // Find all magnetic elements

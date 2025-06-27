@@ -165,6 +165,34 @@ export function generateResumePDF() {
     addBullet(bullet);
   });
   
+  // Check if we need a new page before Mike Shaw section
+  if (yPosition > 180) {
+    doc.addPage();
+    yPosition = 20;
+  }
+  
+  // Mike Shaw Automotive
+  yPosition += 5;
+  doc.setFontSize(12);
+  doc.setTextColor(...headerColor);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Mike Shaw Automotive — Internet Sales Director / BI Developer', leftMargin, yPosition);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10);
+  doc.text('Nov 2010 – Aug 2017', rightMargin - 45, yPosition);
+  yPosition += lineHeight;
+  
+  const mikeShawBullets = [
+    'Managed 30-person sales team while designing custom business intelligence dashboards for sales, finance, and marketing',
+    'Designed and implemented scalable analytics system adopted across multiple dealerships nationwide',
+    'Led digital marketing strategies, inventory management, CRM optimizations, and cross-department process improvements',
+    'Partnered with vendors to architect sales and finance analytics tool deployed across multiple automotive retail locations'
+  ];
+  
+  mikeShawBullets.forEach(bullet => {
+    addBullet(bullet);
+  });
+  
   // Check if we need a new page before Education section
   if (yPosition > 200) {
     doc.addPage();

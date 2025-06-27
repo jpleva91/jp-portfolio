@@ -101,7 +101,7 @@ PROFESSIONAL EXPERIENCE
 INFICON — Senior Software Engineer | June 2022 – Present | Remote
 • Architected and led greenfield development of a modern Nx monorepo platform for semiconductor enterprise reporting tools, defining scalable library structures, CI/CD pipelines, and versioning strategy adopted company-wide
 • Designed and published reusable UI libraries, improving development velocity and consistency across multiple apps and teams
-• Spearheaded prototyping of agentic AI workflows, integrating LLMs (Claude, Mastra) into real-time charting and grid solutions, influencing executive direction and securing client interest from major semiconductor partners
+• Spearheaded prototyping of agentic AI workflows, integrating LLMs (Claude, Mastra) into real-time charting and grid solutions for major semiconductor partners
 • Evaluated and implemented modern alternatives to Highcharts and AG Grid for improved performance and visualization capabilities
 • Acted as a cross-team technical leader, providing architectural guidance, tooling improvements, and mentorship to developers across multiple initiatives
 • Managed CI/CD integration and NPM package publishing for shared UI libraries, standardizing component reuse and maintaining version control discipline across teams

@@ -107,7 +107,7 @@ export function generateResumePDF() {
   const inficonBullets = [
     'Architected and led greenfield development of modern Nx monorepo platform for semiconductor enterprise reporting tools, defining scalable library structures and CI/CD pipelines adopted company-wide',
     'Designed and published reusable UI libraries, improving development velocity and consistency across multiple apps and teams',
-    'Spearheaded prototyping of agentic AI workflows, integrating LLMs into real-time charting solutions, influencing executive direction',
+    'Spearheaded prototyping of agentic AI workflows, integrating LLMs into real-time charting solutions for enterprise clients',
     'Evaluated and implemented modern alternatives to Highcharts and AG Grid for improved performance and visualization',
     'Acted as cross-team technical leader, providing architectural guidance and mentorship across multiple initiatives'
   ];

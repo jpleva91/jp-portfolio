@@ -44,7 +44,6 @@ export class CommandPalette {
       { id: 'crt-mode', title: 'Toggle CRT Mode', icon: '📺', action: () => this.toggleCRT(), category: 'Fun' },
       { id: 'emoji-rain', title: 'Emoji Rain', icon: '🌧️', action: () => this.startEmojiRain(), category: 'Fun' },
       { id: 'portfolio-stats', title: 'Show Portfolio Stats', icon: '📊', action: () => this.toggleStats(), category: 'Fun' },
-      { id: 'wake-pet', title: 'Wake Virtual Pet', icon: '🐱', action: () => this.wakePet(), category: 'Fun' },
     ];
     
     this.filteredCommands = [...this.commands];
@@ -131,11 +130,6 @@ export class CommandPalette {
     setTimeout(() => {
       this.input.focus();
     }, 50);
-    
-    // Unlock achievement
-    if (window.unlockAchievement) {
-      window.unlockAchievement('curious');
-    }
   }
   
   close() {
@@ -333,12 +327,6 @@ export class CommandPalette {
     const { portfolioStats } = await import('./portfolio-stats.js');
     portfolioStats.toggle();
     analytics.trackFeature('Portfolio Stats');
-  }
-  
-  async wakePet() {
-    const { virtualPet } = await import('./virtual-pet.js');
-    virtualPet.wake();
-    analytics.trackFeature('Virtual Pet');
   }
   
   confetti() {

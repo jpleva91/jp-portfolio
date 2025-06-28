@@ -17,8 +17,6 @@ function initThemeToggle() {
       localStorage.setItem('theme', newTheme);
       analytics.trackFeature(`Theme: ${newTheme}`);
       
-      // Dispatch theme change event for achievements
-      document.dispatchEvent(new CustomEvent('themeChanged', { detail: newTheme }));
       
       // Update icon
       const icon = themeToggle.querySelector('svg path');
@@ -40,10 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const section = e.target.getAttribute('href').substring(1);
       analytics.trackNavClick(section);
       
-      // Track sections for explorer achievement
-      if (window.trackSectionVisit) {
-        window.trackSectionVisit(section);
-      }
     });
   });
   
@@ -99,10 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
         generateResumePDF();
         analytics.trackDownload('Resume PDF');
         
-        // Unlock achievement
-        if (window.unlockAchievement) {
-          window.unlockAchievement('scholar');
-        }
         
         // Show success state
         downloadBtn.innerHTML = `

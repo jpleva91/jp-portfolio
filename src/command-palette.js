@@ -41,7 +41,6 @@ export class CommandPalette {
       // Fun
       { id: 'surprise', title: 'Surprise Me!', icon: '🎉', action: () => this.surprise(), category: 'Fun' },
       { id: 'tecmo-bowl', title: 'Play Tecmo Bowl', icon: '🏈', action: () => this.launchTecmoBowl(), category: 'Fun' },
-      { id: 'matrix', title: 'Enter the Matrix', icon: '💊', action: () => this.matrixMode(), category: 'Fun' },
     ];
     
     this.filteredCommands = [...this.commands];
@@ -292,20 +291,16 @@ export class CommandPalette {
   surprise() {
     const surprises = [
       () => this.showToast('🎉 You found the surprise command!'),
-      () => this.matrixMode(),
       () => this.confetti(),
       () => this.showToast('🚀 To the moon!'),
+      () => this.showToast('⚡ Lightning fast!'),
+      () => this.showToast('🌟 You\'re a star!'),
     ];
     
     const surprise = surprises[Math.floor(Math.random() * surprises.length)];
     surprise();
   }
   
-  matrixMode() {
-    document.body.classList.add('matrix-mode');
-    setTimeout(() => document.body.classList.remove('matrix-mode'), 5000);
-    this.showToast('🔴💊 Welcome to the Matrix');
-  }
   
   async launchTecmoBowl() {
     const { TecmoBowl } = await import('./tecmo-bowl.js');

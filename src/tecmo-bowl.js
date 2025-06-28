@@ -7,13 +7,19 @@ export class TecmoBowl {
     
     // Game state
     this.gameRunning = false;
-    this.score = { player: 0, cpu: 0 };
+    this.score = { lions: 0, bears: 0 };
     this.quarter = 1;
     this.timeLeft = 90; // seconds per quarter
     this.down = 1;
     this.yardsToGo = 10;
     this.fieldPosition = 20; // starting at own 20
-    this.possession = 'player'; // 'player' or 'cpu'
+    this.possession = 'lions'; // 'lions' or 'bears'
+    
+    // Team colors
+    this.teamColors = {
+      lions: { primary: '#0076B6', secondary: '#B0B7BC', name: 'LIONS' },
+      bears: { primary: '#0B162A', secondary: '#C83803', name: 'BEARS' }
+    };
     
     // Player state
     this.player = { x: 100, y: 200, speed: 3, hasBall: true };
@@ -32,8 +38,7 @@ export class TecmoBowl {
   init() {
     this.createGameModal();
     this.setupControls();
-    this.createDefenders();
-    this.showPlaySelection();
+    this.drawField(); // Show field immediately
   }
 
   createGameModal() {
@@ -49,13 +54,13 @@ export class TecmoBowl {
         <h2 class="text-2xl font-bold text-white mb-1 font-mono">TECMO BOWL 🏈</h2>
         <div class="flex justify-between items-center text-white mb-2 px-4">
           <div class="text-sm">
-            <span class="text-yellow-400">PLAYER</span>: <span id="player-score">0</span>
+            <span class="text-blue-400">LIONS</span>: <span id="lions-score">0</span>
           </div>
           <div class="text-sm">
             Q<span id="quarter">1</span> - <span id="time">1:30</span>
           </div>
           <div class="text-sm">
-            <span class="text-red-400">CPU</span>: <span id="cpu-score">0</span>
+            <span class="text-orange-400">BEARS</span>: <span id="bears-score">0</span>
           </div>
         </div>
         <div id="game-status" class="text-sm text-green-400 mb-2 font-mono h-5"></div>
@@ -63,18 +68,13 @@ export class TecmoBowl {
       
       <canvas id="tecmo-canvas" width="600" height="400" class="border-2 border-gray-700 rounded bg-green-800"></canvas>
       
-      <div id="play-selection" class="hidden mt-4 grid grid-cols-2 gap-2">
-        <button class="play-button bg-blue-600 hover:bg-blue-700 text-white p-3 rounded font-mono text-sm transition-colors" data-play="run-left">
-          RUN LEFT
-        </button>
-        <button class="play-button bg-blue-600 hover:bg-blue-700 text-white p-3 rounded font-mono text-sm transition-colors" data-play="run-right">
-          RUN RIGHT
-        </button>
-        <button class="play-button bg-blue-600 hover:bg-blue-700 text-white p-3 rounded font-mono text-sm transition-colors" data-play="pass-short">
-          SHORT PASS
-        </button>
-        <button class="play-button bg-blue-600 hover:bg-blue-700 text-white p-3 rounded font-mono text-sm transition-colors" data-play="pass-long">
-          LONG PASS
+      <div id="game-instructions" class="mt-4 text-center text-white">
+        <p class="text-lg font-bold mb-2">KICKOFF RETURN!</p>
+        <p class="text-sm mb-1">⬆️⬇️⬅️➡️ or WASD to move</p>
+        <p class="text-sm mb-1">SPACE for speed burst</p>
+        <p class="text-sm mb-3">Return the kickoff for a touchdown!</p>
+        <button id="start-game" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded font-mono text-lg transition-colors">
+          START GAME
         </button>
       </div>
       
@@ -95,14 +95,7 @@ export class TecmoBowl {
     
     // Setup buttons
     document.getElementById('tecmo-close').addEventListener('click', () => this.close());
-    
-    // Play selection buttons
-    document.querySelectorAll('.play-button').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        this.selectedPlay = e.target.dataset.play;
-        this.startPlay();
-      });
-    });
+    document.getElementById('start-game').addEventListener('click', () => this.startKickoff());
   }
 
   setupControls() {
@@ -155,56 +148,42 @@ export class TecmoBowl {
     }
   }
 
-  showPlaySelection() {
-    document.getElementById('play-selection').classList.remove('hidden');
-    document.getElementById('game-status').textContent = `${this.down}${this.getOrdinal(this.down)} & ${this.yardsToGo} at ${this.fieldPosition}`;
-  }
-
-  hidePlaySelection() {
-    document.getElementById('play-selection').classList.add('hidden');
-  }
-
-  startPlay() {
-    this.hidePlaySelection();
+  startKickoff() {
+    // Hide instructions
+    document.getElementById('game-instructions').style.display = 'none';
+    document.getElementById('game-status').textContent = 'KICKOFF RETURN!';
+    
+    // Reset game state
     this.isRunning = true;
-    this.player.x = 100;
+    this.player.x = 60; // Start in end zone
     this.player.y = 200;
     this.player.hasBall = true;
+    this.fieldPosition = 0;
     
-    // Reset defenders based on play
-    if (this.selectedPlay.includes('run')) {
-      this.createDefenders();
-    } else {
-      // Pass play - defenders spread out more
-      this.defenders = [];
-      for (let i = 0; i < 4; i++) {
-        this.defenders.push({
-          x: 300 + Math.random() * 250,
-          y: 50 + i * 80,
-          speed: 1.8 + Math.random() * 0.7,
-          angle: 0
-        });
-      }
-    }
+    // Create kickoff coverage team
+    this.createKickoffCoverage();
     
+    // Start game
     this.startGameLoop();
+  }
+  
+  createKickoffCoverage() {
+    this.defenders = [];
+    // Create a realistic kickoff coverage team
+    for (let i = 0; i < 8; i++) {
+      this.defenders.push({
+        x: 350 + Math.random() * 100, // Spread across midfield
+        y: 50 + (i * 40), // Different lanes
+        speed: 2 + Math.random() * 0.8,
+        angle: 0
+      });
+    }
   }
 
   startGameLoop() {
     this.gameRunning = true;
     this.gameLoop = requestAnimationFrame(() => this.update());
     
-    // Start game timer
-    if (!this.timer) {
-      this.timer = setInterval(() => {
-        this.timeLeft--;
-        this.updateTime();
-        
-        if (this.timeLeft <= 0) {
-          this.endQuarter();
-        }
-      }, 1000);
-    }
   }
 
   update() {
@@ -282,20 +261,20 @@ export class TecmoBowl {
     this.ctx.translate(30, this.height / 2);
     this.ctx.rotate(-Math.PI / 2);
     this.ctx.textAlign = 'center';
-    this.ctx.fillText('PLAYER', 0, 0);
+    this.ctx.fillText('LIONS', 0, 0);
     this.ctx.restore();
     
     this.ctx.save();
     this.ctx.translate(this.width - 30, this.height / 2);
     this.ctx.rotate(Math.PI / 2);
     this.ctx.textAlign = 'center';
-    this.ctx.fillText('CPU', 0, 0);
+    this.ctx.fillText('BEARS', 0, 0);
     this.ctx.restore();
   }
 
   drawPlayers() {
-    // Draw player (blue)
-    this.ctx.fillStyle = '#0066cc';
+    // Draw player (Lions blue)
+    this.ctx.fillStyle = '#0076B6';
     this.ctx.fillRect(this.player.x - 10, this.player.y - 10, 20, 20);
     
     // Ball indicator
@@ -329,26 +308,33 @@ export class TecmoBowl {
     cancelAnimationFrame(this.gameLoop);
     
     // Calculate yards gained
-    const yardsGained = Math.floor((this.player.x - 100) / 6);
-    this.fieldPosition += yardsGained;
-    this.yardsToGo -= yardsGained;
+    const yardsGained = Math.floor((this.player.x - 60) / 6);
+    document.getElementById('game-status').textContent = `TACKLED! ${yardsGained} yard return`;
     
-    if (this.yardsToGo <= 0) {
-      this.down = 1;
-      this.yardsToGo = 10;
-      document.getElementById('game-status').textContent = `First down! ${yardsGained} yard gain`;
-    } else {
-      this.down++;
-      if (this.down > 4) {
-        this.turnover();
-        return;
-      }
-      document.getElementById('game-status').textContent = `${yardsGained} yard gain`;
-    }
-    
+    // Show try again
     setTimeout(() => {
-      this.showPlaySelection();
-    }, 2000);
+      document.getElementById('game-instructions').style.display = 'block';
+      document.getElementById('game-instructions').innerHTML = `
+        <p class="text-lg font-bold mb-2 text-yellow-400">TACKLED!</p>
+        <p class="text-sm mb-3">${yardsGained} yard return. Try again!</p>
+        <button id="play-again" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded font-mono text-lg transition-colors">
+          TRY AGAIN
+        </button>
+      `;
+      document.getElementById('play-again').addEventListener('click', () => {
+        document.getElementById('game-instructions').innerHTML = `
+          <p class="text-lg font-bold mb-2">KICKOFF RETURN!</p>
+          <p class="text-sm mb-1">⬆️⬇️⬅️➡️ or WASD to move</p>
+          <p class="text-sm mb-1">SPACE for speed burst</p>
+          <p class="text-sm mb-3">Return the kickoff for a touchdown!</p>
+          <button id="start-game" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded font-mono text-lg transition-colors">
+            START GAME
+          </button>
+        `;
+        document.getElementById('start-game').addEventListener('click', () => this.startKickoff());
+        this.drawField();
+      });
+    }, 1500);
   }
 
   touchdown() {
@@ -356,16 +342,14 @@ export class TecmoBowl {
     this.gameRunning = false;
     cancelAnimationFrame(this.gameLoop);
     
-    if (this.possession === 'player') {
-      this.score.player += 7;
-      document.getElementById('player-score').textContent = this.score.player;
-      document.getElementById('game-status').textContent = 'TOUCHDOWN!!!';
-    }
+    this.score.lions += 7;
+    document.getElementById('lions-score').textContent = this.score.lions;
+    document.getElementById('game-status').textContent = 'TOUCHDOWN LIONS!!!';
     
     // Celebration animation
     let flash = 0;
     const celebrate = setInterval(() => {
-      this.ctx.fillStyle = flash % 2 === 0 ? '#ffff00' : '#ff00ff';
+      this.ctx.fillStyle = flash % 2 === 0 ? '#0076B6' : '#ffffff';
       this.ctx.font = 'bold 48px monospace';
       this.ctx.textAlign = 'center';
       this.ctx.fillText('TOUCHDOWN!', this.width / 2, this.height / 2);
@@ -373,9 +357,34 @@ export class TecmoBowl {
       
       if (flash > 10) {
         clearInterval(celebrate);
-        this.kickoff();
+        // Show play again button
+        this.showPlayAgain();
       }
     }, 200);
+  }
+  
+  showPlayAgain() {
+    document.getElementById('game-instructions').style.display = 'block';
+    document.getElementById('game-instructions').innerHTML = `
+      <p class="text-lg font-bold mb-2 text-green-400">TOUCHDOWN!</p>
+      <p class="text-sm mb-3">Great return! Try again?</p>
+      <button id="play-again" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded font-mono text-lg transition-colors">
+        PLAY AGAIN
+      </button>
+    `;
+    document.getElementById('play-again').addEventListener('click', () => {
+      document.getElementById('game-instructions').innerHTML = `
+        <p class="text-lg font-bold mb-2">KICKOFF RETURN!</p>
+        <p class="text-sm mb-1">⬆️⬇️⬅️➡️ or WASD to move</p>
+        <p class="text-sm mb-1">SPACE for speed burst</p>
+        <p class="text-sm mb-3">Return the kickoff for a touchdown!</p>
+        <button id="start-game" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded font-mono text-lg transition-colors">
+          START GAME
+        </button>
+      `;
+      document.getElementById('start-game').addEventListener('click', () => this.startKickoff());
+      this.drawField();
+    });
   }
 
   turnover() {

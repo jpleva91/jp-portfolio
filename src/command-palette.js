@@ -1,3 +1,5 @@
+import { analytics } from './analytics.js';
+
 // Command Palette - Inspired by VS Code and Raycast
 export class CommandPalette {
   constructor() {
@@ -238,6 +240,7 @@ export class CommandPalette {
       this.close();
       try {
         command.action();
+        analytics.trackFeature(`Command: ${command.title}`);
       } catch (error) {
         console.error('Command execution error:', error);
         this.showToast('❌ Command failed: ' + error.message);

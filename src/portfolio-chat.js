@@ -1,3 +1,5 @@
+import { analytics } from './analytics.js';
+
 export class PortfolioChat {
   constructor() {
     this.messages = [];
@@ -106,6 +108,7 @@ export class PortfolioChat {
     
     if (this.isOpen) {
       this.chatInput.focus();
+      analytics.trackChat('Chat Opened');
       
       // Add welcome message if first time
       if (this.messages.length === 0) {
@@ -121,6 +124,7 @@ export class PortfolioChat {
     // Add user message
     this.addMessage(message, 'user');
     this.messages.push({ role: 'user', content: message });
+    analytics.trackChat('Message Sent');
     
     // Clear input and disable
     this.chatInput.value = '';

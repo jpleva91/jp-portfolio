@@ -1,3 +1,5 @@
+import { analytics } from './analytics.js';
+
 // Simple form handler for contact form
 // Theme toggle functionality
 function initThemeToggle() {
@@ -13,6 +15,7 @@ function initThemeToggle() {
       const newTheme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
       html.setAttribute('data-theme', newTheme);
       localStorage.setItem('theme', newTheme);
+      analytics.trackFeature(`Theme: ${newTheme}`);
       
       // Update icon
       const icon = themeToggle.querySelector('svg path');
@@ -27,6 +30,14 @@ function initThemeToggle() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
+  
+  // Track navigation clicks
+  document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const section = e.target.getAttribute('href').substring(1);
+      analytics.trackNavClick(section);
+    });
+  });
   
   const contactForm = document.getElementById('contact-form');
   
@@ -43,11 +54,19 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Form submission:', data);
       
       alert('Thank you for your message! I\'ll get back to you soon.');
+      analytics.trackCTA('Contact Form Submit');
       
       // Reset form
       contactForm.reset();
     });
   }
+  
+  // Track external links
+  document.querySelectorAll('a[href^="http"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      analytics.trackExternalLink(e.target.href);
+    });
+  });
   
   // Add smooth scroll behavior for navigation links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -75,6 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Import the PDF generator
       const { generateResumePDF } = await import('./resume-pdf.js');
       generateResumePDF();
+      analytics.trackDownload('Resume PDF');
     });
   }
   

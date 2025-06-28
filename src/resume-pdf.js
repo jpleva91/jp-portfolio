@@ -66,6 +66,8 @@ export function generateResumePDF() {
   doc.setFontSize(10);
   doc.setTextColor(...textColor);
   doc.text('jpleva91@gmail.com | linkedin.com/in/jared-pleva | github.com/jpleva91', leftMargin, yPosition);
+  yPosition += lineHeight - 2;
+  doc.text('Portfolio: jpleva91.github.io/jp-portfolio', leftMargin, yPosition);
   yPosition += lineHeight;
   
   // Summary

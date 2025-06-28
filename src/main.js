@@ -39,27 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
   
-  const contactForm = document.getElementById('contact-form');
-  
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      // Get form data
-      const formData = new FormData(contactForm);
-      const data = Object.fromEntries(formData);
-      
-      // Here you would normally send the data to a server
-      // For now, we'll just log it and show an alert
-      console.log('Form submission:', data);
-      
-      alert('Thank you for your message! I\'ll get back to you soon.');
-      analytics.trackCTA('Contact Form Submit');
-      
-      // Reset form
-      contactForm.reset();
-    });
-  }
   
   // Track external links
   document.querySelectorAll('a[href^="http"]').forEach(link => {

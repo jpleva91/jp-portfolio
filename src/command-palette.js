@@ -40,6 +40,7 @@ export class CommandPalette {
       
       // Fun
       { id: 'surprise', title: 'Surprise Me!', icon: '🎉', action: () => this.surprise(), category: 'Fun' },
+      { id: 'tecmo-bowl', title: 'Play Tecmo Bowl', icon: '🏈', action: () => this.launchTecmoBowl(), category: 'Fun' },
       { id: 'matrix', title: 'Enter the Matrix', icon: '💊', action: () => this.matrixMode(), category: 'Fun' },
     ];
     
@@ -304,6 +305,12 @@ export class CommandPalette {
     document.body.classList.add('matrix-mode');
     setTimeout(() => document.body.classList.remove('matrix-mode'), 5000);
     this.showToast('🔴💊 Welcome to the Matrix');
+  }
+  
+  async launchTecmoBowl() {
+    const { TecmoBowl } = await import('./tecmo-bowl.js');
+    new TecmoBowl();
+    analytics.trackFeature('Tecmo Bowl Game');
   }
   
   confetti() {

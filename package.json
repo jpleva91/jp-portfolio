@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@ai-sdk/openai": "^0.0.24",
+    "@sendgrid/mail": "^8.1.5",
     "ai": "^3.0.23",
     "lru-cache": "^10.1.0"
   }

@@ -41,6 +41,10 @@ export class CommandPalette {
       // Fun
       { id: 'surprise', title: 'Surprise Me!', icon: '🎉', action: () => this.surprise(), category: 'Fun' },
       { id: 'tecmo-bowl', title: 'Play Tecmo Bowl', icon: '🏈', action: () => this.launchTecmoBowl(), category: 'Fun' },
+      { id: 'crt-mode', title: 'Toggle CRT Mode', icon: '📺', action: () => this.toggleCRT(), category: 'Fun' },
+      { id: 'emoji-rain', title: 'Emoji Rain', icon: '🌧️', action: () => this.startEmojiRain(), category: 'Fun' },
+      { id: 'portfolio-stats', title: 'Show Portfolio Stats', icon: '📊', action: () => this.toggleStats(), category: 'Fun' },
+      { id: 'wake-pet', title: 'Wake Virtual Pet', icon: '🐱', action: () => this.wakePet(), category: 'Fun' },
     ];
     
     this.filteredCommands = [...this.commands];
@@ -127,6 +131,11 @@ export class CommandPalette {
     setTimeout(() => {
       this.input.focus();
     }, 50);
+    
+    // Unlock achievement
+    if (window.unlockAchievement) {
+      window.unlockAchievement('curious');
+    }
   }
   
   close() {
@@ -306,6 +315,30 @@ export class CommandPalette {
     const { TecmoBowl } = await import('./tecmo-bowl.js');
     new TecmoBowl();
     analytics.trackFeature('Tecmo Bowl Game');
+  }
+  
+  async toggleCRT() {
+    const { crtMode } = await import('./crt-mode.js');
+    crtMode.toggle();
+    analytics.trackFeature('CRT Mode');
+  }
+  
+  async startEmojiRain() {
+    const { emojiRain } = await import('./emoji-rain.js');
+    emojiRain.start(5000, 'medium');
+    analytics.trackFeature('Emoji Rain');
+  }
+  
+  async toggleStats() {
+    const { portfolioStats } = await import('./portfolio-stats.js');
+    portfolioStats.toggle();
+    analytics.trackFeature('Portfolio Stats');
+  }
+  
+  async wakePet() {
+    const { virtualPet } = await import('./virtual-pet.js');
+    virtualPet.wake();
+    analytics.trackFeature('Virtual Pet');
   }
   
   confetti() {

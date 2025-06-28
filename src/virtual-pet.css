@@ -1,0 +1,17 @@
+/* Virtual Pet Styles */
+#virtual-pet {
+  animation: pet-bounce 3s ease-in-out infinite;
+}
+
+@keyframes pet-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+#virtual-pet .text-4xl {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}

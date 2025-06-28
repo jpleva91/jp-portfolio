@@ -148,6 +148,11 @@ export class Terminal {
       this.writeLine('Type "help" for available commands');
       this.writeLine('');
     }
+    
+    // Unlock achievement
+    if (window.unlockAchievement) {
+      window.unlockAchievement('hacker');
+    }
   }
   
   close() {
@@ -246,6 +251,11 @@ export class Terminal {
     if (downloadBtn) {
       downloadBtn.click();
       this.writeLine('Resume downloaded successfully!', 'success');
+      
+      // Unlock achievement
+      if (window.unlockAchievement) {
+        window.unlockAchievement('scholar');
+      }
     }
   }
   

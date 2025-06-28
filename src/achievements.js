@@ -267,5 +267,11 @@ export class AchievementSystem {
 // Export for other modules to trigger achievements
 export const achievements = new AchievementSystem();
 
+// Export functions for global access
+if (typeof window !== 'undefined') {
+  window.unlockAchievement = (id) => achievements.unlock(id);
+  window.trackSectionVisit = (section) => achievements.trackSectionVisit(section);
+}
+
 // Make it globally available for easy unlocking
 window.unlockAchievement = (id) => achievements.unlock(id);

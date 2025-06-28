@@ -153,6 +153,11 @@ export class TecmoBowl {
     document.getElementById('game-instructions').style.display = 'none';
     document.getElementById('game-status').textContent = 'KICKOFF RETURN!';
     
+    // Unlock achievement
+    if (window.unlockAchievement) {
+      window.unlockAchievement('gamer');
+    }
+    
     // Reset game state
     this.isRunning = true;
     this.player.x = 60; // Start in end zone

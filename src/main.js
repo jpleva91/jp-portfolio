@@ -17,6 +17,9 @@ function initThemeToggle() {
       localStorage.setItem('theme', newTheme);
       analytics.trackFeature(`Theme: ${newTheme}`);
       
+      // Dispatch theme change event for achievements
+      document.dispatchEvent(new CustomEvent('themeChanged', { detail: newTheme }));
+      
       // Update icon
       const icon = themeToggle.querySelector('svg path');
       if (newTheme === 'dark') {
@@ -36,6 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
     link.addEventListener('click', (e) => {
       const section = e.target.getAttribute('href').substring(1);
       analytics.trackNavClick(section);
+      
+      // Track sections for explorer achievement
+      if (window.trackSectionVisit) {
+        window.trackSectionVisit(section);
+      }
     });
   });
   
@@ -74,6 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const { generateResumePDF } = await import('./resume-pdf.js');
       generateResumePDF();
       analytics.trackDownload('Resume PDF');
+      
+      // Unlock achievement
+      if (window.unlockAchievement) {
+        window.unlockAchievement('scholar');
+      }
     });
   }
   

@@ -1,0 +1,108 @@
+/* CRT Mode Styles */
+.crt-mode {
+  position: relative;
+  animation: crt-flicker 0.15s infinite;
+}
+
+.crt-mode::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 100;
+  animation: crt-scanlines 8s linear infinite;
+}
+
+.crt-mode::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 255, 0, 0.03) 0%,
+    rgba(0, 255, 0, 0) 70%
+  );
+  pointer-events: none;
+  z-index: 101;
+}
+
+.crt-mode.amber::after {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 176, 0, 0.03) 0%,
+    rgba(255, 176, 0, 0) 70%
+  );
+}
+
+@keyframes crt-flicker {
+  0%, 100% {
+    opacity: 0.99;
+  }
+  50% {
+    opacity: 0.98;
+  }
+}
+
+@keyframes crt-scanlines {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(10px);
+  }
+}
+
+.crt-vignette {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  pointer-events: none;
+  z-index: 102;
+}
+
+.crt-curve {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 20px solid transparent;
+  border-radius: 40px;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  z-index: 103;
+}
+
+/* Text effects in CRT mode */
+.crt-mode * {
+  text-shadow: 0 0 2px rgba(0, 255, 0, 0.8);
+}
+
+.crt-mode.amber * {
+  text-shadow: 0 0 2px rgba(255, 176, 0, 0.8);
+}
+
+/* Retro terminal font */
+.crt-mode {
+  font-family: 'Courier New', monospace !important;
+}

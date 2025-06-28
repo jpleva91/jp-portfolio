@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debug Test</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+    .test-section {
+      border: 2px solid #ccc;
+      padding: 20px;
+      margin: 20px 0;
+      height: 150vh; /* Make it scrollable */
+    }
+    .status {
+      padding: 10px;
+      background: #f0f0f0;
+      margin: 10px 0;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Debug Test Page</h1>
+  
+  <div class="status" id="pet-status">Virtual Pet Status: Loading...</div>
+  <div class="status" id="achievements-status">Achievements Status: Loading...</div>
+  
+  <div class="test-section">
+    <h2>Scrollable Content</h2>
+    <p>This section is tall to test scrolling behavior.</p>
+  </div>
+  
+  <script type="module">
+    // Test if modules load properly
+    import('./src/virtual-pet.js')
+      .then(module => {
+        document.getElementById('pet-status').textContent = 'Virtual Pet Status: Loaded Successfully';
+        console.log('Virtual Pet module:', module);
+        console.log('Virtual Pet instance:', module.virtualPet);
+      })
+      .catch(err => {
+        document.getElementById('pet-status').textContent = 'Virtual Pet Status: Error - ' + err.message;
+        console.error('Virtual Pet Error:', err);
+      });
+      
+    import('./src/achievements.js')
+      .then(module => {
+        document.getElementById('achievements-status').textContent = 'Achievements Status: Loaded Successfully';
+        console.log('Achievements module:', module);
+        console.log('Achievements instance:', module.achievements);
+      })
+      .catch(err => {
+        document.getElementById('achievements-status').textContent = 'Achievements Status: Error - ' + err.message;
+        console.error('Achievements Error:', err);
+      });
+      
+    // Test scrollbar behavior
+    console.log('Body overflow-x:', window.getComputedStyle(document.body).overflowX);
+    console.log('HTML overflow-x:', window.getComputedStyle(document.documentElement).overflowX);
+    console.log('Body scrollWidth:', document.body.scrollWidth);
+    console.log('Body clientWidth:', document.body.clientWidth);
+    console.log('Window innerWidth:', window.innerWidth);
+  </script>
+</body>
+</html>

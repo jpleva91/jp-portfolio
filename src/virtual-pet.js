@@ -32,6 +32,15 @@ export class VirtualPet {
   }
 
   createPet() {
+    // Check if pet already exists
+    if (document.getElementById('virtual-pet')) {
+      this.petElement = document.getElementById('virtual-pet');
+      this.petBody = this.petElement.querySelector('.text-4xl');
+      this.speechBubble = this.petElement.querySelector('.absolute.bottom-full');
+      this.nameTag = this.petElement.querySelector('.absolute.-top-6');
+      return;
+    }
+    
     // Pet container
     this.petElement = document.createElement('div');
     this.petElement.id = 'virtual-pet';
@@ -268,5 +277,15 @@ export class VirtualPet {
   }
 }
 
-// Create pet instance
-export const virtualPet = new VirtualPet();
+// Create pet instance when DOM is ready
+let virtualPet;
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    virtualPet = new VirtualPet();
+  });
+} else {
+  virtualPet = new VirtualPet();
+}
+
+export { virtualPet };

@@ -222,6 +222,43 @@ export function generateResumePDF() {
   doc.setFont('helvetica', 'normal');
   doc.text(' — General Assembly', leftMargin + 65, yPosition);
   
-  // Save the PDF
-  doc.save('Jared_Pleva_Resume.pdf');
+  // Save the PDF with mobile-friendly approach
+  try {
+    // Get the PDF as blob
+    const pdfBlob = doc.output('blob');
+    
+    // Create object URL
+    const pdfUrl = URL.createObjectURL(pdfBlob);
+    
+    // Create a temporary link element
+    const link = document.createElement('a');
+    link.href = pdfUrl;
+    link.download = 'Jared_Pleva_Resume.pdf';
+    
+    // For mobile devices, we need to add the link to the DOM
+    document.body.appendChild(link);
+    
+    // Trigger the download
+    link.click();
+    
+    // Clean up
+    setTimeout(() => {
+      document.body.removeChild(link);
+      URL.revokeObjectURL(pdfUrl);
+    }, 100);
+    
+    // Fallback for iOS devices which might not support download attribute
+    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      // For iOS, open in new tab as fallback
+      setTimeout(() => {
+        if (!link.download) {
+          window.open(pdfUrl, '_blank');
+        }
+      }, 200);
+    }
+  } catch (error) {
+    console.error('Error generating PDF:', error);
+    // Fallback to direct save
+    doc.save('Jared_Pleva_Resume.pdf');
+  }
 }

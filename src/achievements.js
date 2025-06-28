@@ -75,6 +75,11 @@ export class AchievementSystem {
   }
 
   createUI() {
+    // Check if UI already exists
+    if (document.getElementById('achievement-notifications')) {
+      return;
+    }
+    
     // Achievement notification container
     const notificationContainer = document.createElement('div');
     notificationContainer.id = 'achievement-notifications';
@@ -264,14 +269,26 @@ export class AchievementSystem {
   }
 }
 
-// Export for other modules to trigger achievements
-export const achievements = new AchievementSystem();
+// Create achievements instance when DOM is ready
+let achievements;
 
-// Export functions for global access
-if (typeof window !== 'undefined') {
-  window.unlockAchievement = (id) => achievements.unlock(id);
-  window.trackSectionVisit = (section) => achievements.trackSectionVisit(section);
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    achievements = new AchievementSystem();
+    // Export functions for global access
+    if (typeof window !== 'undefined') {
+      window.unlockAchievement = (id) => achievements.unlock(id);
+      window.trackSectionVisit = (section) => achievements.trackSectionVisit(section);
+    }
+  });
+} else {
+  achievements = new AchievementSystem();
+  // Export functions for global access
+  if (typeof window !== 'undefined') {
+    window.unlockAchievement = (id) => achievements.unlock(id);
+    window.trackSectionVisit = (section) => achievements.trackSectionVisit(section);
+  }
 }
 
-// Make it globally available for easy unlocking
-window.unlockAchievement = (id) => achievements.unlock(id);
+// Export for other modules to trigger achievements
+export { achievements };
